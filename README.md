@@ -1,7 +1,7 @@
 # Teste Técnico - QA Tester - 4blue
 
 ## Contexto
-Este documento foi elaborado com base na tarefa descrita no teste técnico da 4blue, que consiste na exploração livre de um microssistema composto pelas seguintes telas: Login, Criação de Conta e Tela de Sucesso.
+Este documento foi elaborado com base na tarefa descrita no teste técnico da 4blue, que consiste na exploração livre de um microssistema composto pelas seguintes telas: login, criação de conta e tela de sucesso.
 
 A partir dessa exploração, foram identificados bugs, inconsistências de interface e oportunidades de melhoria, que foram registrados e classificados conforme severidade e prioridade.
 
@@ -84,7 +84,7 @@ A análise considerou:
 
 ---
 
-### BUG 04 - Campo de telefone não valida formato e caracter númerico
+### BUG 04 - Campo de telefone não valida formato e caractere númerico
 **Descrição:** Embora exista máscara visual para telefone, não há validação efetiva do conteúdo informado.
 
 **Passos para reproduzir:**
@@ -110,9 +110,9 @@ A análise considerou:
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro (Criar conta).
 2. Preencher senha com um valor.
-4. Preencher confirmação com valor diferente.
-5. Preencher os demais campos conforme necessário, com dados válidos.
-6. Enviar o formulário.
+3. Preencher confirmação com valor diferente.
+4. Preencher os demais campos conforme necessário, com dados válidos.
+5. Enviar o formulário.
 
 **Resultado atual:** O sistema permite prosseguir mesmo com divergência entre senha e confirmação.
 
@@ -164,9 +164,31 @@ A análise considerou:
 **Prioridade:** Média
 
 ---
+
+### BUG 08 - Sistema permite cadastro com e-mail já existente
+
+**Descrição:** O sistema não valida se o e-mail informado já está cadastrado na base de usuários, permitindo a criação de múltiplas contas com o mesmo endereço de e-mail.
+
+**Passos para reproduzir:** 
+1. Acessar a tela de cadastro (Criar conta).
+2. Realizar um cadastro com um e-mail válido (exemplo: teste@email.com).
+3. Após concluir o cadastro, acessar novamente a tela de criação de conta.
+4. Tentar cadastrar um novo usuário utilizando o mesmo e-mail.
+
+**Resultado atual:** O sistema permite concluir o cadastro utilizando um e-mail que já existe na base de usuários.
+
+**Resultado esperado:** O sistema deve impedir o cadastro e exibir mensagem informando que o e-mail já está cadastrado, orientando o usuário a realizar login ou recuperar a senha.
+
+**Impacto:** A ausência de validação de unicidade do e-mail pode gerar múltiplas contas associadas ao mesmo endereço, comprometendo a integridade da base de dados e causando inconsistências em fluxos como autenticação, recuperação de senha, comunicação com o usuário e controle de identidade. Além disso, pode gerar conflitos na gestão de contas e dificultar o suporte ao usuário.
+
+**Severidade:** Alto
+**Prioridade:** Alta
+
+---
+
 ## Tela de Login
 
-### BUG 08 - Sistema permite login com e-mail e senha vazios após cadastro inconsistente
+### BUG 09 - Sistema permite login com e-mail e senha vazios após cadastro inconsistente
 **Descrição:** Após a criação de usuário inválido com e-mail e senha vazios, o sistema passa a permitir autenticação com e-mail e senha em branco.
 
 **Passos para reproduzir:**
@@ -186,7 +208,7 @@ A análise considerou:
 
 ---
 
-### BUG 09 - Mensagem de erro de login é genérica
+### BUG 10 - Mensagem de erro de login é genérica
 **Descrição:** Ao tentar autenticar, a mensagem exibida é genérica: "Conta não encontrada. Crie uma conta primeiro." Isso dificulta entender se o problema está no e-mail inexistente, na senha incorreta ou em outro cenário.
 
 **Passos para reproduzir:**
@@ -205,7 +227,7 @@ A análise considerou:
 
 ---
 
-### BUG 10 - Login válido exibe simultaneamente mensagem de sucesso e alerta de erro inesperado
+### BUG 11 - Login válido exibe simultaneamente mensagem de sucesso e alerta de erro inesperado
 **Descrição:** Ao realizar login com credenciais válidas, o sistema apresenta mensagem de sucesso, porém também exibe um alerta de "Erro inesperado".
 
 **Passos para reproduzir:**
@@ -225,11 +247,11 @@ A análise considerou:
 
 ---
 
-### BUG 11 – Texto de validação de senha exibido incorretamente na tela de login
+### BUG 12 – Texto de validação de senha exibido incorretamente na tela de login
 
 **Descrição:** Na tela de login, abaixo do campo de senha, é exibida a mensagem "A senha precisa ter no mínimo 8 caracteres e 1 caractere especial.". Esse texto refere-se às regras de criação de senha (fluxo de cadastro ou redefinição de senha) e não é aplicável ao processo de autenticação. Além disso, a tela de login não apresenta a opção "Esqueceu a senha?", que é uma funcionalidade comum para recuperação de acesso.
 
-**Passos para reproduzir**
+**Passos para reproduzir:**
 1. Acessar a tela de login da aplicação.
 2. Observar o texto exibido abaixo do campo Senha.
 
@@ -244,9 +266,9 @@ A análise considerou:
 
 ---
 
-## Problemas Gerais do Sistema
+## Problemas Gerais
 
-### BUG 12 - Problemas de responsividade em viewport mobile
+### BUG 13 - Problemas de responsividade em viewport mobile
 **Descrição:** Há erro de responsividade recorrente nas telas mobile, com formulários excessivamente estendidos na vertical, elementos desconfigurados e barra de rolagem vertical desnecessária.
 
 **Passos para reproduzir:**
@@ -265,7 +287,7 @@ A análise considerou:
 
 ---
 
-### BUG 13 - Ausência de identificadores estáveis nos elementos prejudica a automação e manutenção
+### BUG 14 - Ausência de identificadores estáveis nos elementos prejudica a automação e manutenção
 **Descrição:** Os elementos interativos das telas, especialmente os campos de entrada de dados do usuário e botões de ação, não possuem identificadores estáveis e específicos, como `id`, `name` ou `data-testid`. Na inspeção, observa-se que os campos dependem principalmente de atributos como `class`, `type` e `placeholder`, que não são ideais para automação confiável e rastreabilidade técnica.
 
 **Passos para reproduzir:**
@@ -275,7 +297,7 @@ A análise considerou:
 
 **Resultado atual:** Os elementos não possuem identificadores estáveis suficientes para facilitar automação confiável.
 
-**Resultado esperado:** Os componentes interativos devem possuir identificadores únicos, consistentes e estáveis, preferencialmente `data-testid`, ou alternativamente `id/name`, para permitir automação confiável, manutenção simplificada e melhor rastreabilidade
+**Resultado esperado:** Os componentes interativos devem possuir identificadores únicos, consistentes e estáveis, preferencialmente `data-testid`, ou alternativamente `id/name`, para permitir automação confiável, manutenção simplificada e melhor rastreabilidade técnica.
 
 **Impacto:** Sem identificadores estáveis (id, name, data-testid), os testes acabam usando seletores frágeis como: :nth-child(), classes visuais e hierarquia do DOM. Qualquer alteração de layout pode quebrar os testes mesmo sem mudança funcional.
 
@@ -291,7 +313,7 @@ Conforme solicitado na tarefa, segue a priorização dos dois bugs mais crítico
 Eu corrigiria este bug primeiro porque ele compromete a integridade do dado na origem. 
 Quando o sistema aceita registros totalmente vazios, toda a cadeia seguinte fica contaminada: autenticação, consistência da base, experiência do usuário e confiabilidade do produto.
 
-### 2) BUG 07 - Sistema permite login com e-mail e senha vazios após cadastro inconsistente
+### 2) BUG 09 - Sistema permite login com e-mail e senha vazios após cadastro inconsistente
 Este seria o segundo bug a ser corrigido porque representa a consequência mais grave do problema anterior: falha de autenticação com impacto direto em segurança e regra de negócio. 
 Permitir login com credenciais vazias é uma quebra crítica do fluxo principal do sistema.
 
