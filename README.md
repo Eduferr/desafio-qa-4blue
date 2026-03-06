@@ -4,6 +4,7 @@
 Este documento foi elaborado com base na tarefa descrita no PDF do teste técnico da 4blue, que solicita a exploração livre do microssistema, identificação de bugs, classificação por severidade e prioridade, além da indicação dos dois bugs que deveriam ser corrigidos primeiro e sugestões de melhoria.
 
 **Sistema avaliado:** `https://qa-play-sim.lovable.app/`  
+
 **Escopo informado no teste:** 
 - Tela de Login
 - Tela de Criação de Conta
