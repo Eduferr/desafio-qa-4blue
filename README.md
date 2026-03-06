@@ -30,7 +30,7 @@ A análise considerou:
 **Descrição:** Na tela de cadastro, é possível submeter o formulário sem preencher nome, telefone, e-mail, senha e confirmação de senha.
 
 **Passos para reproduzir:**
-1. Acessar a tela de cadastro (Criar conta).
+1. Acessar a tela de cadastro.
 2. Deixar todos os campos em branco.
 3. Clicar no botão de cadastro.
 
@@ -50,7 +50,7 @@ A análise considerou:
 **Descrição:** O formulário de cadastro aceita submissão mesmo quando apenas um dos campos é informado.
 
 **Passos para reproduzir:**
-1. Acessar a tela de cadastro (Criar conta).
+1. Acessar a tela de cadastro.
 2. Preencher apenas um ou alguns dos campos do formulário (por exemplo: apenas nome ou apenas e-mail).
 3. Deixar os demais campos obrigatórios em branco
 4. Clicar em cadastrar.
@@ -71,7 +71,7 @@ A análise considerou:
 **Descrição:** O campo de e-mail apresenta máscara ou expectativa visual de estrutura, porém não valida formatos inválidos.
 
 **Passos para reproduzir:**
-1. Acessar a tela de cadastro (Criar conta).
+1. Acessar a tela de cadastro.
 2. Informar um e-mail inválido, como `teste`, `teste@` ou `teste.com`.
 3. Preencher os demais campos conforme necessário, com dados válidos.
 4. Enviar o formulário.
@@ -92,7 +92,7 @@ A análise considerou:
 **Descrição:** Embora exista máscara visual para telefone, não há validação efetiva do conteúdo informado.
 
 **Passos para reproduzir:**
-1. Acessar a tela de cadastro (Criar conta).
+1. Acessar a tela de cadastro.
 2. Informar telefone incompleto ou inválido.
 3. Preencher os demais campos conforme necessário, com dados válidos.
 4. Enviar o formulário.
@@ -113,7 +113,7 @@ A análise considerou:
 **Descrição:** O sistema não garante que os campos de senha e confirmação possuam exatamente o mesmo valor.
 
 **Passos para reproduzir:**
-1. Acessar a tela de cadastro (Criar conta).
+1. Acessar a tela de cadastro.
 2. Preencher senha com um valor.
 3. Preencher confirmação com valor diferente.
 4. Preencher os demais campos conforme necessário, com dados válidos.
@@ -135,7 +135,7 @@ A análise considerou:
 **Descrição:** Os campos de senha não validam as regras apresentadas ou esperadas, como mínimo de 8 caracteres e pelo menos 1 caractere especial.
 
 **Passos para reproduzir:**
-1. Acessar a tela de cadastro (Criar conta).
+1. Acessar a tela de cadastro.
 2. Informar senha curta ou sem caractere especial.
 3. Confirmar a senha.
 4. Preencher os demais campos conforme necessário, com dados válidos.
@@ -177,7 +177,7 @@ A análise considerou:
 **Descrição:** O sistema não valida se o e-mail informado já está cadastrado na base de usuários, permitindo a criação de múltiplas contas com o mesmo endereço de e-mail.
 
 **Passos para reproduzir:** 
-1. Acessar a tela de cadastro (Criar conta).
+1. Acessar a tela de cadastro.
 2. Realizar um cadastro com um e-mail válido (exemplo: teste@email.com).
 3. Após concluir o cadastro, acessar novamente a tela de criação de conta.
 4. Tentar cadastrar um novo usuário utilizando o mesmo e-mail.
