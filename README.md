@@ -1,29 +1,30 @@
 # Teste Técnico - QA Tester - 4blue
 
 ## Contexto
-Este documento foi elaborado com base na tarefa descrita no PDF do teste técnico da 4blue, que solicita a exploração livre do microssistema, identificação de bugs, classificação por severidade e prioridade, além da indicação dos dois bugs que deveriam ser corrigidos primeiro e sugestões de melhoria.
+Este documento foi elaborado com base na tarefa descrita no teste técnico da 4blue, que consiste na exploração livre de um microssistema composto pelas seguintes telas: Login, Criação de Conta e Tela de Sucesso.
+
+A partir dessa exploração, foram identificados bugs, inconsistências de interface e oportunidades de melhoria, que foram registrados e classificados conforme severidade e prioridade.
+
+Além disso, o documento também apresenta a análise dos dois bugs considerados mais críticos para correção imediata, acompanhada de justificativas técnicas, bem como sugestões de melhoria relacionadas à usabilidade, validação de dados e qualidade geral da aplicação.
 
 **Sistema avaliado:** `https://qa-play-sim.lovable.app/`  
-
-**Escopo informado no teste:** 
-- Tela de Login
-- Tela de Criação de Conta
-- Tela simples de Sucesso.
 
 ---
 
 ## Estratégia de análise
 A análise considerou:
-- comportamento funcional das telas de login e cadastro;
-- validações de campos obrigatórios e formato;
-- mensagens de erro e sucesso;
-- consistência visual em viewport mobile;
-- riscos básicos de segurança;
-- observações de testabilidade para futura automação.
+- Comportamento funcional das telas de login e cadastro;
+- Validações de campos obrigatórios e formato;
+- Mensagens de erro e sucesso;
+- Consistência visual em viewport mobile;
+- Riscos básicos de segurança;
+- Observações de testabilidade para futura automação.
 
 ---
 
-## Bugs encontrados
+# Bugs encontrados
+
+## Tela de Criação de Conta
 
 ### BUG 01 - Sistema permite cadastrar usuário com todos os campos vazios
 **Descrição:** Na tela de cadastro, é possível submeter o formulário sem preencher nome, telefone, e-mail, senha e confirmação de senha.
@@ -37,6 +38,8 @@ A análise considerou:
 
 **Resultado esperado:** O sistema deve impedir o cadastro e exibir validações por campo, informando que os campos obrigatórios não foram preenchidos.
 
+**Impacto:** A possibilidade de cadastrar usuários com todos os campos vazios compromete gravemente a integridade da base de dados e o funcionamento do sistema de autenticação. Esse comportamento permite a criação de registros inválidos, podendo gerar inconsistências em diversos fluxos da aplicação, como login, recuperação de conta e identificação de usuários, além de indicar ausência de validações básicas no processo de cadastro.
+
 **Severidade:** Crítico  
 **Prioridade:** Alta
 
@@ -47,47 +50,54 @@ A análise considerou:
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro (Criar conta).
-2. Preencher apenas um dos campos, como nome ou e-mail.
+2. Preencher apenas um dos campos, (nome, telefone, email, senha ou confirma senha).
 3. Clicar em cadastrar.
 
 **Resultado atual:** O sistema permite concluir o cadastro com dados incompletos.
 
 **Resultado esperado:** O sistema deve exigir o preenchimento completo de todos os campos obrigatórios antes de permitir o cadastro.
 
+**Impacto:** A possibilidade de concluir o cadastro com preenchimento parcial compromete a integridade e a consistência dos dados armazenados no sistema, permitindo a criação de contas incompletas ou inválidas. Esse comportamento pode afetar fluxos posteriores da aplicação, como autenticação, recuperação de senha, comunicação com o usuário e rastreabilidade de informações, além de indicar ausência de validação adequada dos campos obrigatórios no processo de cadastro.
+
 **Severidade:** Crítico  
 **Prioridade:** Alta
 
 ---
 
-### BUG 03 - Campo de e-mail não valida formato na tela de cadastro
+### BUG 03 - Campo de e-mail não valida formato
 **Descrição:** O campo de e-mail apresenta máscara ou expectativa visual de estrutura, porém não valida formatos inválidos.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro (Criar conta).
 2. Informar um e-mail inválido, como `teste`, `teste@` ou `teste.com`.
-3. Preencher os demais campos conforme necessário.
+3. Preencher os demais campos conforme necessário, com dados válidos.
 4. Enviar o formulário.
 
 **Resultado atual:** O sistema aceita o cadastro com e-mail em formato inválido.
 
 **Resultado esperado:** O sistema deve validar o padrão do e-mail e impedir o cadastro enquanto o valor estiver fora do formato esperado.
 
+**Impacto:** A ausência de validação adequada do formato de e-mail permite o cadastro de usuários com endereços inválidos, comprometendo a integridade da base de dados e dificultando processos que dependem desse contato, como recuperação de senha, envio de notificações e comunicação com o usuário.
+
 **Severidade:** Alto  
 **Prioridade:** Alta
 
 ---
 
-### BUG 04 - Campo de telefone não valida formato na tela de cadastro
+### BUG 04 - Campo de telefone não valida formato e caracter númerico
 **Descrição:** Embora exista máscara visual para telefone, não há validação efetiva do conteúdo informado.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro (Criar conta).
 2. Informar telefone incompleto ou inválido.
-3. Enviar o formulário.
+3. Preencher os demais campos conforme necessário, com dados válidos.
+4. Enviar o formulário.
 
 **Resultado atual:** O sistema aceita números fora do formato esperado.
 
 **Resultado esperado:** O sistema deve validar quantidade de dígitos e estrutura do telefone antes de concluir o cadastro.
+
+**Impacto:** A ausência de validação efetiva do campo de telefone permite o cadastro de dados inválidos ou incompletos, comprometendo a qualidade e a confiabilidade das informações armazenadas no sistema. Isso pode dificultar processos de contato, recuperação de conta, autenticação adicional e comunicação com o usuário, além de gerar inconsistências na base de dados.
 
 **Severidade:** Médio  
 **Prioridade:** Média
@@ -100,12 +110,15 @@ A análise considerou:
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro (Criar conta).
 2. Preencher senha com um valor.
-3. Preencher confirmação com valor diferente.
-4. Enviar o formulário.
+4. Preencher confirmação com valor diferente.
+5. Preencher os demais campos conforme necessário, com dados válidos.
+6. Enviar o formulário.
 
 **Resultado atual:** O sistema permite prosseguir mesmo com divergência entre senha e confirmação.
 
 **Resultado esperado:** O sistema deve bloquear o cadastro e informar que os campos precisam ser idênticos.
+
+**Impacto:** A ausência de validação entre os campos de senha e confirmação pode resultar na criação de contas com credenciais diferentes das pretendidas pelo usuário. Esse comportamento pode impedir futuros acessos à conta, gerar frustração durante o login e aumentar a demanda por suporte para recuperação de senha.
 
 **Severidade:** Alto  
 **Prioridade:** Alta
@@ -119,19 +132,42 @@ A análise considerou:
 1. Acessar a tela de cadastro (Criar conta).
 2. Informar senha curta ou sem caractere especial.
 3. Confirmar a senha.
-4. Enviar o formulário.
+4. Preencher os demais campos conforme necessário, com dados válidos.
+5. Enviar o formulário.
 
 **Resultado atual:** O sistema aceita senhas fora do critério mínimo.
 
 **Resultado esperado:** O sistema deve rejeitar senhas que não atendam aos critérios definidos e exibir mensagem clara ao usuário.
+
+**Impacto:** A falta de validação das regras de complexidade de senha viola boas práticas de segurança e pode resultar na criação de credenciais vulneráveis. Isso aumenta o risco de acessos indevidos, ataques de força bruta e comprometimento de contas de usuários, além de indicar falhas nas políticas de segurança da aplicação.
 
 **Severidade:** Alto  
 **Prioridade:** Alta
 
 ---
 
-### BUG 07 - Sistema permite login com e-mail e senha vazios após cadastro inconsistente
-**Descrição:** Após a criação de usuário inválido com campos vazios, o sistema passa a permitir autenticação com e-mail e senha em branco.
+### BUG 07 - Campos do formulário ultrapassam o container 
+**Descrição:** Na tela de cadastro, alguns campos do formulário, como **Telefone** e **Confirmar senha**, excedem os limites visuais do card principal, causando quebra de layout e desalinhamento entre os elementos da interface.
+
+**Passos para reproduzir:**
+1. Acessar a tela de cadastro.
+2. Observar o posicionamento dos campos no formulário.
+3. Verificar o alinhamento visual dos inputs em relação ao container principal.
+
+**Resultado atual:** Alguns campos ultrapassam a área do card, ficando visualmente desalinhados e comprometendo a organização da interface.
+
+**Resultado esperado:** Todos os campos devem permanecer contidos dentro do card, com largura, espaçamento e alinhamento consistentes, preservando a harmonia visual da tela.
+
+**Impacto:** O problema compromete a consistência visual da interface e transmite sensação de baixa qualidade do produto. Além de prejudicar a experiência do usuário, pode dificultar a leitura, o preenchimento dos campos e a percepção de confiabilidade da aplicação, especialmente em fluxos sensíveis como cadastro.
+
+**Severidade:** Médio  
+**Prioridade:** Média
+
+---
+## Tela de Login
+
+### BUG 08 - Sistema permite login com e-mail e senha vazios após cadastro inconsistente
+**Descrição:** Após a criação de usuário inválido com e-mail e senha vazios, o sistema passa a permitir autenticação com e-mail e senha em branco.
 
 **Passos para reproduzir:**
 1. Realizar cadastro com campos vazios.
@@ -143,30 +179,14 @@ A análise considerou:
 
 **Resultado esperado:** O sistema deve bloquear a autenticação sem credenciais válidas e impedir que registros inválidos sejam utilizados para login.
 
+**Impacto:** Trata-se de uma falha crítica de segurança, pois permite o bypass do mecanismo de autenticação, possibilitando acesso ao sistema sem credenciais válidas. Esse comportamento compromete diretamente a integridade do controle de acesso da aplicação, podendo permitir acessos não autorizados a funcionalidades e dados do sistema. Além disso, evidencia ausência de validações adequadas no lado do servidor (server-side), aumentando o risco de inconsistências na base de dados e uso indevido da plataforma.
+
 **Severidade:** Crítico  
 **Prioridade:** Alta
 
 ---
 
-### BUG 08 - Campo de e-mail não valida formato na tela de login
-**Descrição:** Na tela de login, o campo de e-mail não impede o envio de valores em formato inválido.
-
-**Passos para reproduzir:**
-1. Acessar a tela de login.
-2. Informar um e-mail inválido.
-3. Informar qualquer senha.
-4. Clicar em entrar.
-
-**Resultado atual:** O sistema processa a tentativa sem validação de formato.
-
-**Resultado esperado:** O sistema deve validar o padrão do e-mail antes de enviar a tentativa de autenticação.
-
-**Severidade:** Médio  
-**Prioridade:** Média
-
----
-
-### BUG 09 - Mensagem de erro de login é genérica e não orienta adequadamente o usuário
+### BUG 09 - Mensagem de erro de login é genérica
 **Descrição:** Ao tentar autenticar, a mensagem exibida é genérica: "Conta não encontrada. Crie uma conta primeiro." Isso dificulta entender se o problema está no e-mail inexistente, na senha incorreta ou em outro cenário.
 
 **Passos para reproduzir:**
@@ -177,6 +197,8 @@ A análise considerou:
 **Resultado atual:** O sistema exibe mensagem genérica, sem boa orientação do problema.
 
 **Resultado esperado:** O sistema deve exibir retorno consistente e útil, sem ambiguidade excessiva, mantendo equilíbrio entre usabilidade e segurança.
+
+**Impacto:** A mensagem de erro genérica reduz a clareza do feedback fornecido ao usuário durante o processo de autenticação, dificultando a identificação do real motivo da falha no login. Isso pode gerar frustração, tentativas repetidas de acesso, aumento na demanda por suporte técnico e menor eficiência no processo de correção ou recuperação de credenciais pelo usuário.
 
 **Severidade:** Médio  
 **Prioridade:** Média
@@ -196,12 +218,35 @@ A análise considerou:
 
 **Resultado esperado:** Em caso de autenticação bem-sucedida, apenas a mensagem de sucesso deve ser exibida, seguida do fluxo esperado de navegação.
 
+**Impacto:** A exibição simultânea de mensagens de sucesso e erro gera inconsistência no feedback do sistema, comprometendo a confiabilidade da aplicação e causando confusão para o usuário. Esse comportamento pode levar o usuário a interpretar que o login falhou, mesmo quando a autenticação foi bem-sucedida, impactando negativamente a experiência de uso e a percepção de estabilidade do sistema.
+
 **Severidade:** Alto  
 **Prioridade:** Alta
 
 ---
 
-### BUG 11 - Problemas de responsividade em viewport mobile
+### BUG 11 – Texto de validação de senha exibido incorretamente na tela de login
+
+**Descrição:** Na tela de login, abaixo do campo de senha, é exibida a mensagem "A senha precisa ter no mínimo 8 caracteres e 1 caractere especial.". Esse texto refere-se às regras de criação de senha (fluxo de cadastro ou redefinição de senha) e não é aplicável ao processo de autenticação. Além disso, a tela de login não apresenta a opção "Esqueceu a senha?", que é uma funcionalidade comum para recuperação de acesso.
+
+**Passos para reproduzir**
+1. Acessar a tela de login da aplicação.
+2. Observar o texto exibido abaixo do campo Senha.
+
+**Resultado atual:** A tela de login apresenta a mensagem: "A senha precisa ter no mínimo 8 caracteres e 1 caractere especial.". Esse texto corresponde à validação de criação de senha e não ao fluxo de login.
+
+**Resultado esperado:** A tela de login deve apresentar a opção: "Esqueceu a senha?". Essa opção deve direcionar o usuário para o fluxo de recuperação ou redefinição de senha.
+
+**Impacto:** Pode gerar confusão ao usuário, pois a mensagem exibida sugere uma validação de formato de senha que não se aplica ao processo de autenticação.
+
+**Severidade:** Baixa
+**Prioridade:** Baixa
+
+---
+
+## Problemas Gerais do Sistema
+
+### BUG 12 - Problemas de responsividade em viewport mobile
 **Descrição:** Há erro de responsividade recorrente nas telas mobile, com formulários excessivamente estendidos na vertical, elementos desconfigurados e barra de rolagem vertical desnecessária.
 
 **Passos para reproduzir:**
@@ -213,12 +258,14 @@ A análise considerou:
 
 **Resultado esperado:** Os elementos devem se adaptar corretamente ao viewport mobile, sem deformações, sem desalinhamentos e sem rolagem desnecessária.
 
+**Impacto:** A falha de responsividade compromete a experiência de navegação em dispositivos móveis, dificultando a visualização e interação com os formulários. Considerando que grande parte dos acessos a sistemas web ocorre por smartphones, o problema pode impactar negativamente a usabilidade, a percepção de qualidade do produto e as taxas de conversão de usuários.
+
 **Severidade:** Médio  
 **Prioridade:** Média
 
 ---
 
-### BUG 12 - Ausência de identificadores estáveis nos elementos prejudica a automação e manutenção
+### BUG 13 - Ausência de identificadores estáveis nos elementos prejudica a automação e manutenção
 **Descrição:** Os elementos não estão identificados de forma consistente por atributos como `id`, `name` ou preferencialmente `data-testid`, o que dificulta automação, manutenção dos testes e rastreabilidade técnica.
 
 **Passos para reproduzir:**
@@ -229,6 +276,8 @@ A análise considerou:
 
 **Resultado esperado:** Os componentes devem possuir identificadores consistentes e estáveis, preferencialmente específicos para teste.
 
+**Impacto:** Sem identificadores estáveis (id, name, data-testid), os testes acabam usando seletores frágeis como: :nth-child(), classes visuais e hierarquia do DOM. Qualquer alteração de layout pode quebrar os testes mesmo sem mudança funcional.
+
 **Severidade:** Baixo  
 **Prioridade:** Média
 
@@ -238,10 +287,12 @@ A análise considerou:
 Conforme solicitado na tarefa, segue a priorização dos dois bugs mais críticos para correção imediata.
 
 ### 1) BUG 01 - Sistema permite cadastrar usuário com todos os campos vazios
-Eu corrigiria este bug primeiro porque ele compromete a integridade do dado na origem. Quando o sistema aceita registros totalmente vazios, toda a cadeia seguinte fica contaminada: autenticação, consistência da base, experiência do usuário e confiabilidade do produto.
+Eu corrigiria este bug primeiro porque ele compromete a integridade do dado na origem. 
+Quando o sistema aceita registros totalmente vazios, toda a cadeia seguinte fica contaminada: autenticação, consistência da base, experiência do usuário e confiabilidade do produto.
 
 ### 2) BUG 07 - Sistema permite login com e-mail e senha vazios após cadastro inconsistente
-Este seria o segundo bug a ser corrigido porque representa a consequência mais grave do problema anterior: falha de autenticação com impacto direto em segurança e regra de negócio. Permitir login com credenciais vazias é uma quebra crítica do fluxo principal do sistema.
+Este seria o segundo bug a ser corrigido porque representa a consequência mais grave do problema anterior: falha de autenticação com impacto direto em segurança e regra de negócio. 
+Permitir login com credenciais vazias é uma quebra crítica do fluxo principal do sistema.
 
 **Justificativa geral da ordem:**
 Esses dois bugs afetam o núcleo do produto: cadastro e autenticação. Além do alto impacto funcional, geram risco de segurança, comprometem a credibilidade da aplicação e inviabilizam qualquer confiança mínima no fluxo principal do usuário.
