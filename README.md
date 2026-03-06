@@ -38,7 +38,7 @@ A análise considerou:
 
 **Resultado esperado:** O sistema deve impedir o cadastro e exibir validações por campo, informando que os campos obrigatórios não foram preenchidos.
 
-**Impacto:** A possibilidade de cadastrar usuários com todos os campos vazios compromete gravemente a integridade da base de dados e o funcionamento do sistema de autenticação. Esse comportamento permite a criação de registros inválidos, podendo gerar inconsistências em diversos fluxos da aplicação, como login, recuperação de conta e identificação de usuários, além de indicar ausência de validações básicas no processo de cadastro.
+**Impacto:** A possibilidade de realizar um cadastro com todos os campos vazios compromete gravemente a integridade da base de dados e o funcionamento do sistema de autenticação. Esse comportamento permite a criação de registros inválidos, podendo gerar inconsistências em diversos fluxos da aplicação, como login, recuperação de conta e identificação de usuários, além de indicar ausência de validações básicas no processo de cadastro.
 
 **Severidade:** Crítico  
 **Prioridade:** Alta\
