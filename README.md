@@ -266,15 +266,16 @@ A análise considerou:
 ---
 
 ### BUG 13 - Ausência de identificadores estáveis nos elementos prejudica a automação e manutenção
-**Descrição:** Os elementos não estão identificados de forma consistente por atributos como `id`, `name` ou preferencialmente `data-testid`, o que dificulta automação, manutenção dos testes e rastreabilidade técnica.
+**Descrição:** Os elementos interativos das telas, especialmente os campos de entrada de dados do usuário e botões de ação, não possuem identificadores estáveis e específicos, como `id`, `name` ou `data-testid`. Na inspeção, observa-se que os campos dependem principalmente de atributos como `class`, `type` e `placeholder`, que não são ideais para automação confiável e rastreabilidade técnica.
 
 **Passos para reproduzir:**
-1. Inspecionar os elementos das telas no navegador.
-2. Verificar os atributos disponíveis nos campos e botões.
+1. Acessar as telas de login e cadastro.
+2. Inspecionar os campos e botões no navegador.
+3. Verificar os atributos disponíveis nos elementos interativos.
 
 **Resultado atual:** Os elementos não possuem identificadores estáveis suficientes para facilitar automação confiável.
 
-**Resultado esperado:** Os componentes devem possuir identificadores consistentes e estáveis, preferencialmente específicos para teste.
+**Resultado esperado:** Os componentes interativos devem possuir identificadores únicos, consistentes e estáveis, preferencialmente `data-testid`, ou alternativamente `id/name`, para permitir automação confiável, manutenção simplificada e melhor rastreabilidade
 
 **Impacto:** Sem identificadores estáveis (id, name, data-testid), os testes acabam usando seletores frágeis como: :nth-child(), classes visuais e hierarquia do DOM. Qualquer alteração de layout pode quebrar os testes mesmo sem mudança funcional.
 
