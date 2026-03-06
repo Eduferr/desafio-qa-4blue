@@ -41,7 +41,8 @@ A análise considerou:
 **Impacto:** A possibilidade de cadastrar usuários com todos os campos vazios compromete gravemente a integridade da base de dados e o funcionamento do sistema de autenticação. Esse comportamento permite a criação de registros inválidos, podendo gerar inconsistências em diversos fluxos da aplicação, como login, recuperação de conta e identificação de usuários, além de indicar ausência de validações básicas no processo de cadastro.
 
 **Severidade:** Crítico  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Link_Reprodução:** [Bug01 - Vídeo](https://drive.google.com/file/d/1VjPqs_c17_RciTYtFVtGL7Nci5xVIeGz/view?usp=drive_link)
 
 ---
 
@@ -50,8 +51,9 @@ A análise considerou:
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro (Criar conta).
-2. Preencher apenas um dos campos, (nome, telefone, email, senha ou confirma senha).
-3. Clicar em cadastrar.
+2. Preencher apenas um ou alguns dos campos do formulário (por exemplo: apenas nome ou apenas e-mail).
+3. Deixar os demais campos obrigatórios em branco
+4. Clicar em cadastrar.
 
 **Resultado atual:** O sistema permite concluir o cadastro com dados incompletos.
 
@@ -60,7 +62,8 @@ A análise considerou:
 **Impacto:** A possibilidade de concluir o cadastro com preenchimento parcial compromete a integridade e a consistência dos dados armazenados no sistema, permitindo a criação de contas incompletas ou inválidas. Esse comportamento pode afetar fluxos posteriores da aplicação, como autenticação, recuperação de senha, comunicação com o usuário e rastreabilidade de informações, além de indicar ausência de validação adequada dos campos obrigatórios no processo de cadastro.
 
 **Severidade:** Crítico  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Link_Reprodução:** [Bug02 - Vídeo](https://drive.google.com/file/d/1ilkN8u6F06TOo5RpckThC35lClqwa3N1/view?usp=drive_link)
 
 ---
 
@@ -80,7 +83,8 @@ A análise considerou:
 **Impacto:** A ausência de validação adequada do formato de e-mail permite o cadastro de usuários com endereços inválidos, comprometendo a integridade da base de dados e dificultando processos que dependem desse contato, como recuperação de senha, envio de notificações e comunicação com o usuário.
 
 **Severidade:** Alto  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Link_Reprodução:** [Bug03 - Vídeo](https://drive.google.com/file/d/1il4u2jHXvLrALipwEjMPZhMjxHtdnsqU/view?usp=drive_link)
 
 ---
 
@@ -100,7 +104,8 @@ A análise considerou:
 **Impacto:** A ausência de validação efetiva do campo de telefone permite o cadastro de dados inválidos ou incompletos, comprometendo a qualidade e a confiabilidade das informações armazenadas no sistema. Isso pode dificultar processos de contato, recuperação de conta, autenticação adicional e comunicação com o usuário, além de gerar inconsistências na base de dados.
 
 **Severidade:** Médio  
-**Prioridade:** Média
+**Prioridade:** Média\
+**Link_Reprodução:** [Bug04 - Vídeo](https://drive.google.com/file/d/1tFQdsI3oBZ7L0NPSmTqHixFnO-CkiECl/view?usp=drive_link)
 
 ---
 
@@ -121,7 +126,8 @@ A análise considerou:
 **Impacto:** A ausência de validação entre os campos de senha e confirmação pode resultar na criação de contas com credenciais diferentes das pretendidas pelo usuário. Esse comportamento pode impedir futuros acessos à conta, gerar frustração durante o login e aumentar a demanda por suporte para recuperação de senha.
 
 **Severidade:** Alto  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Link_Reprodução:** [Bug05 - Vídeo](https://drive.google.com/file/d/1Ce7h2TiAXbD37hwHHUmYd4AmX9tf6z45/view?usp=drive_link)
 
 ---
 
@@ -161,7 +167,8 @@ A análise considerou:
 **Impacto:** O problema compromete a consistência visual da interface e transmite sensação de baixa qualidade do produto. Além de prejudicar a experiência do usuário, pode dificultar a leitura, o preenchimento dos campos e a percepção de confiabilidade da aplicação, especialmente em fluxos sensíveis como cadastro.
 
 **Severidade:** Médio  
-**Prioridade:** Média
+**Prioridade:** Média\
+**Link_Reprodução:** [Bug07 - Vídeo](https://drive.google.com/file/d/1sQRty8JUj0ZrA95FPyEnSjOfObIiX9A4/view?usp=drive_link)
 
 ---
 
@@ -182,7 +189,8 @@ A análise considerou:
 **Impacto:** A ausência de validação de unicidade do e-mail pode gerar múltiplas contas associadas ao mesmo endereço, comprometendo a integridade da base de dados e causando inconsistências em fluxos como autenticação, recuperação de senha, comunicação com o usuário e controle de identidade. Além disso, pode gerar conflitos na gestão de contas e dificultar o suporte ao usuário.
 
 **Severidade:** Alto
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Link_Reprodução:** [Bug08 - Vídeo](https://drive.google.com/file/d/1kizlnLkKQBdAP0RiNhoP_MtjqDIyfgJo/view?usp=drive_link)
 
 ---
 
@@ -204,7 +212,8 @@ A análise considerou:
 **Impacto:** Trata-se de uma falha crítica de segurança, pois permite o bypass do mecanismo de autenticação, possibilitando acesso ao sistema sem credenciais válidas. Esse comportamento compromete diretamente a integridade do controle de acesso da aplicação, podendo permitir acessos não autorizados a funcionalidades e dados do sistema. Além disso, evidencia ausência de validações adequadas no lado do servidor (server-side), aumentando o risco de inconsistências na base de dados e uso indevido da plataforma.
 
 **Severidade:** Crítico  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Link_Reprodução:** [Bug09 - Vídeo]()
 
 ---
 
@@ -223,7 +232,8 @@ A análise considerou:
 **Impacto:** A mensagem de erro genérica reduz a clareza do feedback fornecido ao usuário durante o processo de autenticação, dificultando a identificação do real motivo da falha no login. Isso pode gerar frustração, tentativas repetidas de acesso, aumento na demanda por suporte técnico e menor eficiência no processo de correção ou recuperação de credenciais pelo usuário.
 
 **Severidade:** Médio  
-**Prioridade:** Média
+**Prioridade:** Média\
+**Link_Reprodução:** [Bug10 - Vídeo](https://drive.google.com/file/d/1AKVxkl10M2X586W5C5xzce6ndV76s6mx/view?usp=drive_link)
 
 ---
 
@@ -243,7 +253,8 @@ A análise considerou:
 **Impacto:** A exibição simultânea de mensagens de sucesso e erro gera inconsistência no feedback do sistema, comprometendo a confiabilidade da aplicação e causando confusão para o usuário. Esse comportamento pode levar o usuário a interpretar que o login falhou, mesmo quando a autenticação foi bem-sucedida, impactando negativamente a experiência de uso e a percepção de estabilidade do sistema.
 
 **Severidade:** Alto  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Link_Reprodução:** [Bug11 - Vídeo](https://drive.google.com/file/d/17IUxBwP_WTXdp9U5SoVUDSB6sOHKHnXj/view?usp=drive_link)
 
 ---
 
@@ -262,7 +273,8 @@ A análise considerou:
 **Impacto:** Pode gerar confusão ao usuário, pois a mensagem exibida sugere uma validação de formato de senha que não se aplica ao processo de autenticação.
 
 **Severidade:** Baixa
-**Prioridade:** Baixa
+**Prioridade:** Baixa\
+**Link_Reprodução:** [Bug12 - Imagem](https://drive.google.com/file/d/1k4655IMAEC4P1uelZYUs01Vui0K5S2o5/view?usp=drive_link)
 
 ---
 
@@ -283,7 +295,8 @@ A análise considerou:
 **Impacto:** A falha de responsividade compromete a experiência de navegação em dispositivos móveis, dificultando a visualização e interação com os formulários. Considerando que grande parte dos acessos a sistemas web ocorre por smartphones, o problema pode impactar negativamente a usabilidade, a percepção de qualidade do produto e as taxas de conversão de usuários.
 
 **Severidade:** Médio  
-**Prioridade:** Média
+**Prioridade:** Média\
+**Link_Reprodução:** [Bug13 - Vídeo](https://drive.google.com/file/d/1arJvGQaK4BwVtF__uSWPIFItW7r2OV3A/view?usp=drive_link)
 
 ---
 
@@ -302,7 +315,8 @@ A análise considerou:
 **Impacto:** Sem identificadores estáveis (id, name, data-testid), os testes acabam usando seletores frágeis como: :nth-child(), classes visuais e hierarquia do DOM. Qualquer alteração de layout pode quebrar os testes mesmo sem mudança funcional.
 
 **Severidade:** Baixo  
-**Prioridade:** Média
+**Prioridade:** Média\
+**Link_Reprodução:** [Bug14 - Imagem](https://drive.google.com/open?id=1u2untEkZj5Pgw5KFOrOuHKI2kkk8ws4b&usp=drive_copy)
 
 ---
 
@@ -326,6 +340,8 @@ Esses dois bugs afetam o núcleo do produto: cadastro e autenticação. Além do
 
 ### Melhorias funcionais
 - Implementar validação obrigatória campo a campo antes do envio.
+- Identificar visualmente os campos obrigatórios utilizando o símbolo (*) ao lado do rótulo do campo.
+- Exibir legenda informando que (*) indica campo obrigatório.
 - Validar formato de e-mail e telefone no front-end e no back-end.
 - Validar regras de senha com mensagens objetivas.
 - Garantir comparação entre senha e confirmação de senha.
