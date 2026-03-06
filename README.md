@@ -24,7 +24,7 @@ A análise considerou:
 
 # Bugs encontrados
 
-## Tela de Criação de Conta
+## Tela de cadastro
 
 ### BUG 01 - Sistema permite cadastrar usuário com todos os campos vazios
 **Descrição:** Na tela de cadastro, é possível submeter o formulário sem preencher nome, telefone, e-mail, senha e confirmação de senha.
