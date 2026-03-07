@@ -55,7 +55,7 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Resultado atual:** Em todos os cenários testados, o sistema permitiu a conclusão do cadastro mesmo com um dos campos obrigatórios deixado em branco.
 
-**Resultado esperado:** O sistema deve impedir a submissão do formulário quando qualquer campo obrigatório não estiver preenchido e apresentar mensagens de validação específicas para o campo correspondente. Essa validação é necessária para garantir a integridade e consistência dos dados cadastrados, evitando a criação de registros incompletos que possam impactar funcionalidades como autenticação, recuperação de conta, comunicação com o usuário e rastreabilidade das informações.
+**Resultado esperado:** O sistema deve impedir a submissão do formulário quando qualquer campo obrigatório não estiver preenchido, exibindo mensagens de validação específicas para o campo correspondente. Essa validação é necessária para garantir a integridade dos dados e evitar a criação de registros incompletos que possam comprometer funcionalidades como autenticação, recuperação de conta e comunicação com o usuário.
 
 **Severidade:** Crítica  
 **Prioridade:** Alta
@@ -74,7 +74,7 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Resultado atual:** Nos cenários testados, o sistema permitiu concluir o cadastro mesmo quando o e-mail informado apresentava formato inválido.
 
-**Resultado esperado:** O sistema deve validar o formato do e-mail conforme o padrão indicado pelo campo (ex.: `usuario@dominio.com`) antes de permitir a submissão do formulário, exibindo uma mensagem de erro quando o valor informado não estiver de acordo com o formato esperado. Essa validação deve garantir que o endereço contenha os elementos mínimos de um e-mail válido, como identificador do usuário, símbolo @ e domínio. Além disso, é essencial para garantir a integridade das informações cadastradas e o funcionamento adequado de funcionalidades que dependem desse dado, como autenticação, recuperação de senha e comunicação com o usuário.
+**Resultado esperado:** O sistema deve validar o formato do e-mail conforme o padrão esperado (ex.: `usuario@dominio.com`) antes de permitir a submissão do formulário, exibindo mensagem de erro quando o valor informado não estiver em conformidade. Essa validação é necessária para garantir a integridade dos dados e o correto funcionamento de funcionalidades como autenticação, recuperação de senha e comunicação com o usuário.
 
 **Severidade:** Alta  
 **Prioridade:** Alta
@@ -94,7 +94,7 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Resultado atual:** Nos cenários testados, o sistema permitiu concluir o cadastro mesmo quando o e-mail informado já estava previamente registrado na base de usuários.
 
-**Resultado esperado:** O sistema deve validar se o e-mail informado já está cadastrado antes de permitir a submissão do formulário, impedir a criação de contas duplicadas e exibir uma mensagem informativa ao usuário, como "Este e-mail já está cadastrado". Essa validação é essencial para garantir a unicidade do identificador de conta, preservar a integridade da base de dados e evitar inconsistências em funcionalidades como autenticação, recuperação de senha e comunicação com o usuário. O sistema também pode orientar o usuário a realizar login ou utilizar a funcionalidade de recuperação de senha caso já possua uma conta cadastrada. 
+**Resultado esperado:** O sistema deve validar se o e-mail informado já está cadastrado antes de permitir a submissão do formulário, impedindo a criação de contas duplicadas e exibindo uma mensagem informativa ao usuário, como `Este e-mail já está cadastrado`. Essa validação garante a unicidade das contas, preserva a integridade da base de dados e evita inconsistências em funcionalidades como autenticação, recuperação de senha e comunicação com o usuário, podendo também orientar o usuário a realizar login ou recuperar a senha.
 
 **Severidade:** Alta  
 **Prioridade:** Alta
@@ -113,7 +113,7 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Resultado atual:** Nos cenários testados, o sistema permitiu concluir o cadastro mesmo quando o telefone informado apresentava formato inválido ou continha caracteres não numéricos.
 
-**Resultado esperado:** O sistema deve validar o formato e a quantidade de dígitos do telefone, conforme indicado pela máscara do campo `(00) 00000-0000`, além de restringir a entrada apenas a caracteres numéricos, antes de permitir a submissão do formulário. Essa validação deve garantir que o campo aceite somente números e que o telefone esteja completo de acordo com o padrão esperado. Sem essas validações, o sistema pode registrar dados incorretos ou inconsistentes, comprometendo a comunicação com o usuário, autenticação adicional e recuperação de conta.
+**Resultado esperado:** O sistema deve validar o formato e a quantidade de dígitos do telefone conforme a máscara do campo `(00) 00000-0000`, permitindo apenas caracteres numéricos antes da submissão do formulário. Essa validação garante que o número esteja completo e no padrão esperado, evitando o registro de dados incorretos que possam comprometer funcionalidades como comunicação com o usuário, autenticação adicional e recuperação de conta.
 
 **Severidade:** Média  
 **Prioridade:** Média
@@ -133,7 +133,7 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Resultado atual:** Nos cenários testados, o sistema permitiu concluir o cadastro mesmo quando os valores informados nos campos de senha e confirmação eram diferentes.
 
-**Resultado esperado:** O sistema deve validar se os valores informados nos campos senha e confirmar senha são idênticos antes de permitir a submissão do formulário, exibindo uma mensagem de erro quando houver divergência entre os campos. Essa validação é necessária para garantir que o usuário cadastre corretamente suas credenciais e evitar situações em que a conta seja criada com uma senha diferente da pretendida, o que pode impedir futuros acessos e gerar demandas adicionais de recuperação de senha.
+**Resultado esperado:** O sistema deve validar se os valores informados nos campos senha e confirmar senha são idênticos antes de permitir a submissão do formulário, exibindo mensagem de erro quando houver divergência. Essa validação garante que o usuário cadastre corretamente suas credenciais e evita problemas de acesso ou solicitações desnecessárias de recuperação de senha.
 
 **Severidade:** Alta  
 **Prioridade:** Alta
@@ -153,7 +153,7 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Resultado atual:** Nos cenários testados, o sistema permitiu concluir o cadastro mesmo quando a senha informada não atendia aos critérios mínimos de segurança.
 
-**Resultado esperado:** O sistema deve validar os critérios mínimos de segurança da senha antes de permitir a submissão do formulário, como quantidade mínima de caracteres e presença de caracteres especiais, exibindo mensagens claras quando os requisitos não forem atendidos. A ausência dessa validação pode permitir a criação de senhas fracas, aumentando o risco de acessos indevidos, ataques de força bruta e comprometimento de contas de usuários, além de indicar falhas nas práticas básicas de segurança da aplicação.
+**Resultado esperado:** O sistema deve validar critérios mínimos de segurança da senha antes da submissão do formulário, como quantidade mínima de caracteres e presença de caracteres especiais, exibindo mensagens claras quando os requisitos não forem atendidos. Essa validação é necessária para evitar senhas fracas e reduzir riscos de acessos indevidos e comprometimento de contas de usuários.
 
 **Severidade:** Alta  
 **Prioridade:** Alta
@@ -307,7 +307,6 @@ Ao permitir o cadastro de usuários sem nenhum dado preenchido, o sistema passa 
 
 Este bug deve ser priorizado em seguida porque compromete diretamente o controle de acesso da aplicação. 
 Permitir login sem credenciais válidas representa uma falha crítica no mecanismo de autenticação e um risco de segurança significativo, pois possibilita acesso indevido ao sistema. Esse comportamento quebra uma regra fundamental de autenticação da aplicação.
-
 
 ---
 
