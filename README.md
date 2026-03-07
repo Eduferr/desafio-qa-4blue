@@ -1,8 +1,7 @@
 # Teste Técnico - QA Tester - 4blue
 
 ## Contexto
-Este documento apresenta os resultados da exploração de um microssistema proposto no teste técnico da 4blue, composto pelas telas de login, criação de conta e tela de sucesso.
-Durante o teste de exploração, foram identificados bugs, inconsistências de interface e oportunidades de melhoria. 
+Este documento apresenta os resultados dos testes exploratórios realizados em um microssistema composto pelas telas de Login, cadastro e tela de Sucesso, com o objetivo de identificar falhas funcionais, inconsistências de interface e oportunidades de melhoria na aplicação. 
 Cada ocorrência foi registrada e classificada conforme sua severidade e prioridade.
 
 **Sistema avaliado:** `https://qa-play-sim.lovable.app/`  
