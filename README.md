@@ -2,7 +2,7 @@
 
 ## Contexto
 
-Este documento apresenta os resultados dos testes exploratórios realizados em um microssistema composto pelas telas de Login, cadastro e tela de Sucesso, com o objetivo de identificar falhas funcionais, inconsistências de interface e oportunidades de melhoria na aplicação.
+Este documento apresenta os resultados dos testes exploratórios realizados em um microssistema composto pelas telas de Login, Cadastro e Sucesso, com o objetivo de identificar falhas funcionais, inconsistências de interface e oportunidades de melhoria na aplicação.
 
 Cada ocorrência foi registrada e classificada conforme sua severidade e prioridade.
 
@@ -60,8 +60,8 @@ A análise considerou os seguintes aspectos do sistema:
 
 ---
 
-### BUG 03 - Campo de e-mail não valida formato
-**Descrição:** O campo de e-mail apresenta uma máscara que indica um formato específico, porém o sistema não valida corretamente valores inválidos informados no campo.
+### BUG 03 - Ausência de validação do formato de e-mail no cadastro
+**Descrição:** Foram realizados os testes de cadastro utilizando valores inválidos no campo de e-mail, com o objetivo de verificar se o sistema valida corretamente o formato do endereço informado.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
@@ -69,103 +69,108 @@ A análise considerou os seguintes aspectos do sistema:
 3. Preencher os demais campos com dados válidos.
 4. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema permite concluir o cadastro mesmo quando o e-mail informado está em formato inválido.
+**Resultado atual:** Nos cenários testados, o sistema permitiu concluir o cadastro mesmo quando o e-mail informado apresentava formato inválido.
 
-**Resultado esperado:** O sistema deve validar o formato do e-mail e impedir o cadastro enquanto o valor informado estiver fora do padrão esperado. Sem essa validação, usuários com endereços inválidos podem ser cadastrados, o que compromete a integridade da base de dados e dificulta processos que dependem desse contato, como recuperação de senha, envio de notificações e comunicação com o usuário.
+**Resultado esperado:** O sistema deve validar o formato do e-mail conforme o padrão indicado pelo campo (ex.: `usuario@dominio.com`) antes de permitir a submissão do formulário, exibindo uma mensagem de erro quando o valor informado não estiver de acordo com o formato esperado. Essa validação deve garantir que o endereço contenha os elementos mínimos de um e-mail válido, como identificador do usuário, símbolo @ e domínio. Além disso, é essencial para garantir a integridade das informações cadastradas e o funcionamento adequado de funcionalidades que dependem desse dado, como autenticação, recuperação de senha e comunicação com o usuário.
 
 **Severidade:** Alta  
 **Prioridade:** Alta
 
 ---
 
-### BUG 04 - Campo de telefone não valida formato e caracteres numéricos
-**Descrição:** Embora exista uma máscara visual para o telefone, não há validação efetiva do conteúdo informado no campo.
+### BUG 04 - Ausência de validação de e-mail já cadastrado
+**Descrição:** Foram realizados testes de cadastro utilizando um endereço de e-mail previamente registrado no sistema, com o objetivo de verificar se a aplicação valida a unicidade desse identificador no momento da criação de novas contas.
+
+**Passos para reproduzir:** 
+1. Acessar a tela de cadastro.
+2. Realizar um cadastro com um e-mail válido (exemplo: `teste@email.com`).
+3. Após a conclusão do cadastro, acessar novamente a tela de criação de conta.
+4. Preencher os campos com novos dados, informando novamente o mesmo e-mail (`teste@email.com`).
+5. Clicar no botão "Criar Conta".
+
+**Resultado atual:** Nos cenários testados, o sistema permitiu concluir o cadastro mesmo quando o e-mail informado já estava previamente registrado na base de usuários.
+
+**Resultado esperado:** O sistema deve validar se o e-mail informado já está cadastrado antes de permitir a submissão do formulário, impedir a criação de contas duplicadas e exibir uma mensagem informativa ao usuário, como "Este e-mail já está cadastrado". Essa validação é essencial para garantir a unicidade do identificador de conta, preservar a integridade da base de dados e evitar inconsistências em funcionalidades como autenticação, recuperação de senha e comunicação com o usuário. O sistema também pode orientar o usuário a realizar login ou utilizar a funcionalidade de recuperação de senha caso já possua uma conta cadastrada. 
+
+**Severidade:** Alta
+**Prioridade:** Alta
+
+---
+
+### BUG 05 - Ausência de validação do formato e conteúdo do campo telefone
+**Descrição:** Foram realizados os testes de cadastro informando valores inválidos no campo de telefone, com o objetivo de verificar se o sistema valida corretamente o formato e o conteúdo numérico esperado para esse campo.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
-2. Informar telefone incompleto ou inválido.
+2. Informar um telefone incompleto ou inválido no campo correspondente.
 3. Preencher os demais campos com dados válidos.
 4. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema aceita qualquer tipo de valor no campo de telefone, incluindo números, letras e outros caracteres, sem realizar validação do formato.
+**Resultado atual:** Nos cenários testados, o sistema permitiu concluir o cadastro mesmo quando o telefone informado apresentava formato inválido ou continha caracteres não numéricos.
 
-**Resultado esperado:** O sistema deve validar a quantidade de dígitos e o formato do telefone antes de permitir a conclusão do cadastro. Sem essa validação, o sistema pode aceitar dados inválidos ou incompletos, o que compromete a qualidade e a confiabilidade das informações armazenadas, podendo gerar inconsistências na base de dados e dificultar processos como contato com o usuário, recuperação de conta, autenticação adicional e outras formas de comunicação.
+**Resultado esperado:** O sistema deve validar o formato e a quantidade de dígitos do telefone, conforme indicado pela máscara do campo `(00) 00000-0000`, além de restringir a entrada apenas a caracteres numéricos, antes de permitir a submissão do formulário. Essa validação deve garantir que o campo aceite somente números e que o telefone esteja completo de acordo com o padrão esperado. Sem essas validações, o sistema pode registrar dados incorretos ou inconsistentes, comprometendo processos como comunicação com o usuário, autenticação adicional e recuperação de conta.
 
 **Severidade:** Média  
 **Prioridade:** Média
 
 ---
 
-### BUG 05 - Campos senha e confirmar senha não validam igualdade
-**Descrição:** O sistema não verifica se os campos de senha e confirmação possuem exatamente o mesmo valor.
+### BUG 06 - Ausência de validação de igualdade entre os campos senha e confirmar senha
+**Descrição:** Foram realizados os testes de cadastro informando valores diferentes nos campos de senha e confirmação de senha, com o objetivo de verificar se o sistema valida corretamente a correspondência entre esses dois campos.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
 2. Preencher o campo senha com um valor.
-3. Preencher o campo confirmação de senha com um valor diferente.
+3. Preencher o campo confirmar senha com um valor diferente.
 4. Preencher os demais campos com dados válidos.
 5. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema permite concluir o cadastro mesmo quando os valores de senha e confirmação são diferentes.
+**Resultado atual:** Nos cenários testados, o sistema permitiu concluir o cadastro mesmo quando os valores informados nos campos de senha e confirmação eram diferentes.
 
-**Resultado esperado:** O sistema deve impedir o cadastro e informar que os campos de senha e confirmação precisam possuir o mesmo valor. A ausência dessa validação pode resultar na criação de contas com credenciais diferentes das pretendidas pelo usuário. Esse comportamento pode impedir futuros acessos à conta, gerar frustração durante o login e aumentar a demanda por suporte para recuperação de senha.
+**Resultado esperado:** O sistema deve validar se os valores informados nos campos senha e confirmar senha são idênticos antes de permitir a submissão do formulário, exibindo uma mensagem de erro quando houver divergência entre os campos. Essa validação é necessária para garantir que o usuário cadastre corretamente suas credenciais e evitar situações em que a conta seja criada com uma senha diferente da pretendida, o que pode impedir futuros acessos e gerar demandas adicionais de recuperação de senha.
 
 **Severidade:** Alta  
 **Prioridade:** Alta
 
 ---
 
-### BUG 06 - Campo de senha não valida critérios mínimos definidos
-**Descrição:** O campo de senha não valida as regras mínimas esperadas, como possuir no mínimo 8 caracteres e ao menos 1 caractere especial.
+### BUG 07 - Ausência de validação de critérios mínimos de segurança para senha
+**Descrição:** Foram realizados os testes de cadastro informando senhas que não atendem aos critérios mínimos de segurança esperados, com o objetivo de verificar se o sistema valida corretamente os requisitos definidos para criação de senha.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
-2. Informar senha curta ou sem caractere especial.
-3. Confirmar a senha.
+2. Informar uma senha que não atenda aos critérios mínimos definidos (por exemplo, com menos de 8 caracteres ou sem caractere especial).
+3. Preencher o campo confirmar senha com o mesmo valor.
 4. Preencher os demais campos com dados válidos.
 5. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema aceita senhas que não atendem aos critérios mínimos definidos.
+**Resultado atual:** Nos cenários testados, o sistema permitiu concluir o cadastro mesmo quando a senha informada não atendia aos critérios mínimos de segurança.
 
-**Resultado esperado:** O sistema deve rejeitar senhas que não atendam aos critérios mínimos definidos e exibir uma mensagem clara informando o motivo da rejeição. A ausência dessa validação pode permitir a criação de senhas fracas, o que aumenta o risco de acessos indevidos, ataques de força bruta e comprometimento de contas de usuários, além de indicar falhas nas práticas básicas de segurança da aplicação.
+**Resultado esperado:** O sistema deve validar os critérios mínimos de segurança da senha antes de permitir a submissão do formulário, como quantidade mínima de caracteres e presença de caracteres especiais, exibindo mensagens claras quando os requisitos não forem atendidos. A ausência dessa validação pode permitir a criação de senhas fracas, aumentando o risco de acessos indevidos, ataques de força bruta e comprometimento de contas de usuários, além de indicar falhas nas práticas básicas de segurança da aplicação.
 
 **Severidade:** Alta  
 **Prioridade:** Alta
 
 ---
 
-### BUG 07 - Campos do formulário ultrapassam o container 
-**Descrição:** Na tela de cadastro, alguns campos do formulário, como Telefone e Confirmar senha, excedem os limites visuais do card principal, causando quebra de layout e desalinhamento entre os elementos da interface.
+### BUG 08 - Sobreposição e quebra de layout entre campos do formulário na tela de cadastro
+**Descrição:** Foi realizada a análise da interface da tela de cadastro com o objetivo de verificar a consistência visual e o alinhamento dos elementos do formulário em relação ao container principal.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
-2. Observar o posicionamento dos campos no formulário.
-3. Verificar o alinhamento visual dos inputs em relação ao container principal.
+2. Observar o posicionamento e o alinhamento dos campos do formulário.
+3. Verificar a relação visual entre os inputs e os limites do card principal.
 
-**Resultado atual:** Alguns campos ultrapassam a área do card, ficando visualmente desalinhados e comprometendo a organização da interface.
+**Resultado atual:** No cenário observado, os campos posicionados na coluna direita do formulário, como **Telefone** e **Confirmar senha**, ultrapassam os limites esperados de layout e ficam parcialmente sobrepostos aos campos da coluna esquerda (**Nome completo** e **Senha**). Além disso, esses campos também excedem os limites visuais do card principal, causando quebra de layout e desalinhamento na interface.
 
-**Resultado esperado:** Todos os campos devem permanecer contidos dentro do card, com largura, espaçamento e alinhamento consistentes, preservando a harmonia visual da tela. Quando esse padrão não é mantido, a consistência visual da interface é comprometida, podendo transmitir a sensação de baixa qualidade do produto e prejudicar a experiência do usuário ao dificultar a leitura e o preenchimento dos campos, especialmente em fluxos sensíveis como o cadastro.
+**Resultado esperado:** Os campos do formulário devem manter alinhamento consistente em suas respectivas colunas, sem sobreposição entre elementos e respeitando os limites do container principal. Essa organização é essencial para preservar a clareza visual da interface e garantir uma experiência adequada ao usuário durante o preenchimento do cadastro.
 
 **Severidade:** Média  
 **Prioridade:** Média
 
 ---
 
-### BUG 08 - Sistema permite cadastro com e-mail já existente
-**Descrição:** O sistema não valida se o e-mail informado já está cadastrado na base de usuários, permitindo a criação de múltiplas contas com o mesmo endereço de e-mail.
 
-**Passos para reproduzir:** 
-1. Acessar a tela de cadastro.
-2. Realizar um cadastro com um e-mail válido (exemplo: teste@email.com).
-3. Após concluir o cadastro, acessar novamente a tela de cadastro.
-4. Tentar cadastrar um novo usuário utilizando o mesmo e-mail.
-
-**Resultado atual:** O sistema permite concluir o cadastro utilizando um e-mail que já existe na base de dados dos usuários.
-
-**Resultado esperado:** O sistema deve impedir o cadastro quando o e-mail informado já estiver registrado e exibir uma mensagem informando que aquele endereço já está cadastrado, orientando o usuário a fazer login ou recuperar a senha. Quando essa validação não existe, o sistema pode permitir a criação de várias contas com o mesmo e-mail, o que compromete a integridade dos dados e pode gerar problemas em funcionalidades como login, recuperação de senha e comunicação com o usuário. Além disso, pode causar conflitos na gestão das contas e dificultar o atendimento em casos de suporte.
-
-**Severidade:** Alta
-**Prioridade:** Alta
 
 ---
 
