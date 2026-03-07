@@ -134,7 +134,7 @@ A análise considerou os seguintes aspectos do sistema:
 ---
 
 ### BUG 07 - Campos do formulário ultrapassam o container 
-**Descrição:** Na tela de cadastro, alguns campos do formulário, como **Telefone** e **Confirmar senha**, excedem os limites visuais do card principal, causando quebra de layout e desalinhamento entre os elementos da interface.
+**Descrição:** Na tela de cadastro, alguns campos do formulário, como Telefone e Confirmar senha, excedem os limites visuais do card principal, causando quebra de layout e desalinhamento entre os elementos da interface.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
@@ -143,9 +143,7 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Resultado atual:** Alguns campos ultrapassam a área do card, ficando visualmente desalinhados e comprometendo a organização da interface.
 
-**Resultado esperado:** Todos os campos devem permanecer contidos dentro do card, com largura, espaçamento e alinhamento consistentes, preservando a harmonia visual da tela.
-
-**Impacto:** O problema compromete a consistência visual da interface e transmite sensação de baixa qualidade do produto. Além de prejudicar a experiência do usuário, pode dificultar a leitura, o preenchimento dos campos e a percepção de confiabilidade da aplicação, especialmente em fluxos sensíveis como cadastro.
+**Resultado esperado:** Todos os campos devem permanecer contidos dentro do card, com largura, espaçamento e alinhamento consistentes, preservando a harmonia visual da tela. Quando esse padrão não é mantido, a consistência visual da interface é comprometida, podendo transmitir a sensação de baixa qualidade do produto e prejudicar a experiência do usuário ao dificultar a leitura e o preenchimento dos campos, especialmente em fluxos sensíveis como o cadastro.
 
 **Severidade:** Média  
 **Prioridade:** Média
@@ -153,20 +151,17 @@ A análise considerou os seguintes aspectos do sistema:
 ---
 
 ### BUG 08 - Sistema permite cadastro com e-mail já existente
-
 **Descrição:** O sistema não valida se o e-mail informado já está cadastrado na base de usuários, permitindo a criação de múltiplas contas com o mesmo endereço de e-mail.
 
 **Passos para reproduzir:** 
 1. Acessar a tela de cadastro.
 2. Realizar um cadastro com um e-mail válido (exemplo: teste@email.com).
-3. Após concluir o cadastro, acessar novamente a tela de criação de conta.
+3. Após concluir o cadastro, acessar novamente a tela de cadastro.
 4. Tentar cadastrar um novo usuário utilizando o mesmo e-mail.
 
-**Resultado atual:** O sistema permite concluir o cadastro utilizando um e-mail que já existe na base de usuários.
+**Resultado atual:** O sistema permite concluir o cadastro utilizando um e-mail que já existe na base de dados dos usuários.
 
-**Resultado esperado:** O sistema deve impedir o cadastro e exibir mensagem informando que o e-mail já está cadastrado, orientando o usuário a realizar login ou recuperar a senha.
-
-**Impacto:** A ausência de validação de unicidade do e-mail pode gerar múltiplas contas associadas ao mesmo endereço, comprometendo a integridade da base de dados e causando inconsistências em fluxos como autenticação, recuperação de senha, comunicação com o usuário e controle de identidade. Além disso, pode gerar conflitos na gestão de contas e dificultar o suporte ao usuário.
+**Resultado esperado:** O sistema deve impedir o cadastro quando o e-mail informado já estiver registrado e exibir uma mensagem informando que aquele endereço já está cadastrado, orientando o usuário a fazer login ou recuperar a senha. Quando essa validação não existe, o sistema pode permitir a criação de várias contas com o mesmo e-mail, o que compromete a integridade dos dados e pode gerar problemas em funcionalidades como login, recuperação de senha e comunicação com o usuário. Além disso, pode causar conflitos na gestão das contas e dificultar o atendimento em casos de suporte.
 
 **Severidade:** Alta
 **Prioridade:** Alta
@@ -176,43 +171,38 @@ A análise considerou os seguintes aspectos do sistema:
 ## Tela de Login
 
 ### BUG 09 - Sistema permite login com e-mail e senha vazios após cadastro inconsistente
-**Descrição:** Após a criação de usuário inválido com e-mail e senha vazios, o sistema passa a permitir autenticação com e-mail e senha em branco.
+**Descrição:** Após a criação de um usuário com e-mail e senha vazios, o sistema passa a permitir login sem o preenchimento desses campos.
 
 **Passos para reproduzir:**
-1. Realizar cadastro com campos vazios.
+1. Realizar cadastro com campos email e senha vazios.
 2. Acessar a tela de login.
 3. Deixar e-mail e senha em branco.
-4. Clicar em entrar.
+4. Clicar em "Entrar".
 
-**Resultado atual:** O sistema autentica o usuário com credenciais vazias.
+**Resultado atual:** O sistema autentica o usuário mesmo com e-mail e senha vazios.
 
-**Resultado esperado:** O sistema deve bloquear a autenticação sem credenciais válidas e impedir que registros inválidos sejam utilizados para login.
+**Resultado esperado:** O sistema deve impedir o login quando os campos de e-mail e senha estiverem vazios e não permitir que registros inválidos sejam utilizados para autenticação. Sem essa validação, o sistema pode permitir acesso sem credenciais válidas, o que representa um risco à segurança, comprometendo o controle de acesso da aplicação e permitindo que usuários não autorizados acessem o sistema. 
 
-**Impacto:** Trata-se de uma falha crítica de segurança, pois permite o bypass do mecanismo de autenticação, possibilitando acesso ao sistema sem credenciais válidas. Esse comportamento compromete diretamente a integridade do controle de acesso da aplicação, podendo permitir acessos não autorizados a funcionalidades e dados do sistema. Além disso, evidencia ausência de validações adequadas no lado do servidor (server-side), aumentando o risco de inconsistências na base de dados e uso indevido da plataforma.
-
-**Severidade:** Crítico  
-**Prioridade:** Alta\
-**Link_Reprodução:** [Bug09 - Vídeo]()
+**Severidade:** Crítica  
+**Prioridade:** Alta
 
 ---
 
 ### BUG 10 - Mensagem de erro de login é genérica
-**Descrição:** Ao tentar autenticar, a mensagem exibida é genérica: "Conta não encontrada. Crie uma conta primeiro." Isso dificulta entender se o problema está no e-mail inexistente, na senha incorreta ou em outro cenário.
+**Descrição:** Ao tentar fazer login, o sistema exibe apenas a mensagem genérica "Conta não encontrada. Crie uma conta primeiro." Esse tipo de mensagem não deixa claro se o problema está no e-mail informado, na senha incorreta ou em outro motivo.
+
 
 **Passos para reproduzir:**
 1. Acessar a tela de login.
 2. Informar credenciais inválidas ou parcialmente incorretas.
-3. Clicar em entrar.
+3. Clicar em "Entrar".
 
-**Resultado atual:** O sistema exibe mensagem genérica, sem boa orientação do problema.
+**Resultado atual:** O sistema exibe uma mensagem genérica, que não ajuda o usuário a entender o motivo da falha no login.
 
-**Resultado esperado:** O sistema deve exibir retorno consistente e útil, sem ambiguidade excessiva, mantendo equilíbrio entre usabilidade e segurança.
+**Resultado esperado:** O sistema deve apresentar uma mensagem mais clara e útil para o usuário, indicando de forma adequada o motivo real da falha na autenticação, pois a mensagem de erro genérica reduz a clareza do feedback fornecido ao usuário durante o processo de autenticação. Isso pode gerar frustração, tentativas repetidas de acesso, aumento na demanda por suporte técnico e menor eficiência no processo de correção ou recuperação de credenciais pelo usuário.
 
-**Impacto:** A mensagem de erro genérica reduz a clareza do feedback fornecido ao usuário durante o processo de autenticação, dificultando a identificação do real motivo da falha no login. Isso pode gerar frustração, tentativas repetidas de acesso, aumento na demanda por suporte técnico e menor eficiência no processo de correção ou recuperação de credenciais pelo usuário.
-
-**Severidade:** Médio  
-**Prioridade:** Média\
-**Link_Reprodução:** [Bug10 - Vídeo](https://drive.google.com/file/d/1AKVxkl10M2X586W5C5xzce6ndV76s6mx/view?usp=drive_link)
+**Severidade:** Média  
+**Prioridade:** Média
 
 ---
 
