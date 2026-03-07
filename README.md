@@ -23,25 +23,25 @@ A análise considerou os seguintes aspectos do sistema:
 
 ## Tela de cadastro
 
-### BUG 01 - Sistema permite cadastrar usuário com todos os campos vazios
-**Descrição:** Na tela de cadastro, o sistema permite a submissão do formulário mesmo quando todos os campos (nome, telefone, e-mail, senha e confirmação de senha) estão vazios.
+### BUG 01 - Ausência total de dados na submissão do cadastro
+**Descrição:** Foi realizado o teste de cadastro com todos os campos obrigatórios (nome, telefone, e-mail, senha e confirmação de senha) deixados em branco.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
 2. Deixar todos os campos do formulário em branco.
 3. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema permite a realização do cadastro mesmo com todos os campos do formulário vazios.
+**Resultado atual:** No cenário testado, o sistema permitiu concluir o cadastro sem nenhum dado preenchido.
 
-**Resultado esperado:** O sistema deve impedir o cadastro quando os campos obrigatórios não estiverem preenchidos e exibir mensagens de validação para cada campo. Permitir o cadastro com dados incompletos pode comprometer a integridade dos dados e gerar inconsistências em funcionalidades como login, recuperação de conta e identificação de usuários, além de indicar ausência de validações básicas no processo de cadastro.
+**Resultado esperado:** O sistema deve impedir a submissão do formulário quando nenhum dado for preenchido e exibir mensagens de validação para cada campo obrigatório, informando que o preenchimento é necessário. Essa validação é essencial para preservar a integridade dos dados e o funcionamento do sistema de autenticação da aplicação.
 
 **Severidade:** Crítica  
 **Prioridade:** Alta
 
 ---
 
-### BUG 02 - Sistema permite cadastro com preenchimento parcial
-**Descrição:** O formulário de cadastro permite a submissão mesmo quando apenas um ou alguns campos são preenchidos.
+### BUG 02 - Ausência parcial de dados na submissão do cadastro
+**Descrição:** Foram realizados testes de cadastro com preenchimento parcial dos campos obrigatórios. Em cada execução, um dos campos (nome, telefone, e-mail, senha ou confirmação de senha) foi deixado em branco para verificar a validação individual dos campos obrigatórios.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
@@ -49,9 +49,9 @@ A análise considerou os seguintes aspectos do sistema:
 3. Deixar os demais campos obrigatórios em branco.
 4. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema permite concluir o cadastro mesmo com campos obrigatórios não preenchidos.
+**Resultado atual:** Em todos os cenários testados, o sistema permitiu a conclusão do cadastro mesmo com um dos campos obrigatórios deixado em branco.
 
-**Resultado esperado:** O sistema deve exigir o preenchimento de todos os campos obrigatórios antes de permitir o cadastro, pois quando aceita um cadastro com apenas parte das informações preenchidas há risco de criar contas incompletas ou inválidas, o que pode comprometer a integridade dos dados. Esse comportamento também pode impactar outras funcionalidades da aplicação, como login, recuperação de senha, comunicação com o usuário e rastreabilidade das informações, além de indicar falta de validações adequadas no processo de cadastro.
+**Resultado esperado:** O sistema deve impedir a submissão do formulário quando qualquer campo obrigatório não estiver preenchido e apresentar mensagens de validação específicas para o campo correspondente. Essa validação é necessária para garantir a integridade e consistência dos dados cadastrados, evitando a criação de registros incompletos que possam impactar funcionalidades como autenticação, recuperação de conta, comunicação com o usuário e rastreabilidade das informações.
 
 **Severidade:** Crítica  
 **Prioridade:** Alta
