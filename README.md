@@ -1,24 +1,22 @@
 # Teste Técnico - QA Tester - 4blue
 
 ## Contexto
-Este documento foi elaborado com base na tarefa descrita no teste técnico da 4blue, que consiste na exploração livre de um microssistema composto pelas seguintes telas: login, criação de conta e tela de sucesso.
-
-A partir dessa exploração, foram identificados bugs, inconsistências de interface e oportunidades de melhoria, que foram registrados e classificados conforme severidade e prioridade.
-
-Além disso, o documento também apresenta a análise dos dois bugs considerados mais críticos para correção imediata, acompanhada de justificativas técnicas, bem como sugestões de melhoria relacionadas à usabilidade, validação de dados e qualidade geral da aplicação.
+Este documento apresenta os resultados da exploração de um microssistema proposto no teste técnico da 4blue, composto pelas telas de login, criação de conta e tela de sucesso.
+Durante o teste de exploração, foram identificados bugs, inconsistências de interface e oportunidades de melhoria. 
+Cada ocorrência foi registrada e classificada conforme sua severidade e prioridade.
 
 **Sistema avaliado:** `https://qa-play-sim.lovable.app/`  
 
 ---
 
 ## Estratégia de análise
-A análise considerou:
+A análise considerou os seguintes aspectos do sistema:
 - Comportamento funcional das telas de login e cadastro;
-- Validações de campos obrigatórios e formato;
-- Mensagens de erro e sucesso;
-- Consistência visual em viewport mobile;
-- Riscos básicos de segurança;
-- Observações de testabilidade para futura automação.
+- Validação de campos obrigatórios e formato dos dados informados;
+- Mensagens de erro e de sucesso apresentadas ao usuário;
+- Consistência visual e comportamento em viewport mobile;
+- Possíveis riscos básicos relacionados à segurança;
+- Aspectos de testabilidade visando uma futura automação de testes.
 
 ---
 
@@ -27,64 +25,55 @@ A análise considerou:
 ## Tela de cadastro
 
 ### BUG 01 - Sistema permite cadastrar usuário com todos os campos vazios
-**Descrição:** Na tela de cadastro, é possível submeter o formulário sem preencher nome, telefone, e-mail, senha e confirmação de senha.
+**Descrição:** Na tela de cadastro, o sistema permite a submissão do formulário mesmo quando todos os campos (nome, telefone, e-mail, senha e confirmação de senha) estão vazios.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
-2. Deixar todos os campos em branco.
-3. Clicar no botão de cadastro.
+2. Deixar todos os campos do formulário em branco.
+3. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema aceita o cadastro mesmo com todos os campos vazios.
+**Resultado atual:** O sistema permite a realização do cadastro mesmo com todos os campos do formulário vazios.
 
-**Resultado esperado:** O sistema deve impedir o cadastro e exibir validações por campo, informando que os campos obrigatórios não foram preenchidos.
-
-**Impacto:** A possibilidade de realizar um cadastro com todos os campos vazios compromete gravemente a integridade da base de dados e o funcionamento do sistema de autenticação. Esse comportamento permite a criação de registros inválidos, podendo gerar inconsistências em diversos fluxos da aplicação, como login, recuperação de conta e identificação de usuários, além de indicar ausência de validações básicas no processo de cadastro.
+**Resultado esperado:** O sistema deve impedir o cadastro quando os campos obrigatórios não estiverem preenchidos e exibir mensagens de validação para cada campo. Permitir o cadastro com dados incompletos pode comprometer a integridade dos dados e gerar inconsistências em funcionalidades como login, recuperação de conta e identificação de usuários, além de indicar ausência de validações básicas no processo de cadastro.
 
 **Severidade:** Crítico  
-**Prioridade:** Alta\
-**Link_Reprodução:** [Bug01 - Vídeo](https://drive.google.com/file/d/1VjPqs_c17_RciTYtFVtGL7Nci5xVIeGz/view?usp=drive_link)
+**Prioridade:** Alta
 
 ---
 
 ### BUG 02 - Sistema permite cadastro com preenchimento parcial
-**Descrição:** O formulário de cadastro aceita submissão mesmo quando apenas um dos campos é informado.
+**Descrição:** O formulário de cadastro permite a submissão mesmo quando apenas um ou alguns campos são preenchidos.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
-2. Preencher apenas um ou alguns dos campos do formulário (por exemplo: apenas nome ou apenas e-mail).
+2. Preencher apenas um ou alguns campos do formulário (por exemplo: apenas nome ou apenas e-mail).
 3. Deixar os demais campos obrigatórios em branco
-4. Clicar em cadastrar.
+4. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema permite concluir o cadastro com dados incompletos.
+**Resultado atual:** O sistema permite concluir o cadastro mesmo com campos obrigatórios não preenchidos.
 
-**Resultado esperado:** O sistema deve exigir o preenchimento completo de todos os campos obrigatórios antes de permitir o cadastro.
-
-**Impacto:** A possibilidade de concluir o cadastro com preenchimento parcial compromete a integridade e a consistência dos dados armazenados no sistema, permitindo a criação de contas incompletas ou inválidas. Esse comportamento pode afetar fluxos posteriores da aplicação, como autenticação, recuperação de senha, comunicação com o usuário e rastreabilidade de informações, além de indicar ausência de validação adequada dos campos obrigatórios no processo de cadastro.
+**Resultado esperado:** O sistema deve exigir o preenchimento de todos os campos obrigatórios antes de permitir o cadastro, pois quando aceita um cadastro com apenas parte das informações preenchidas há risco de criar contas incompletas ou inválidas, o que pode comprometer a integridade dos dados. Esse comportamento também pode impactar outras funcionalidades da aplicação, como login, recuperação de senha, comunicação com o usuário e rastreabilidade das informações, além de indicar falta de validações adequadas no processo de cadastro.
 
 **Severidade:** Crítico  
-**Prioridade:** Alta\
-**Link_Reprodução:** [Bug02 - Vídeo](https://drive.google.com/file/d/1ilkN8u6F06TOo5RpckThC35lClqwa3N1/view?usp=drive_link)
+**Prioridade:** Alta
 
 ---
 
 ### BUG 03 - Campo de e-mail não valida formato
-**Descrição:** O campo de e-mail apresenta máscara ou expectativa visual de estrutura, porém não valida formatos inválidos.
+**Descrição:** O campo de e-mail apresenta uma máscara que indica um formato específico, porém o sistema não valida corretamente valores inválidos informados no campo.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
 2. Informar um e-mail inválido, como `teste`, `teste@` ou `teste.com`.
-3. Preencher os demais campos conforme necessário, com dados válidos.
-4. Enviar o formulário.
+3. Preencher os demais campos com dados válidos.
+4. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema aceita o cadastro com e-mail em formato inválido.
+**Resultado atual:** O sistema permite concluir o cadastro mesmo quando o e-mail informado está em formato inválido.
 
-**Resultado esperado:** O sistema deve validar o padrão do e-mail e impedir o cadastro enquanto o valor estiver fora do formato esperado.
-
-**Impacto:** A ausência de validação adequada do formato de e-mail permite o cadastro de usuários com endereços inválidos, comprometendo a integridade da base de dados e dificultando processos que dependem desse contato, como recuperação de senha, envio de notificações e comunicação com o usuário.
+**Resultado esperado:** O sistema deve validar o formato do e-mail e impedir o cadastro enquanto o valor informado estiver fora do padrão esperado. Sem essa validação, usuários com endereços inválidos podem ser cadastrados, o que compromete a integridade da base de dados e dificulta processos que dependem desse contato, como recuperação de senha, envio de notificações e comunicação com o usuário.
 
 **Severidade:** Alto  
-**Prioridade:** Alta\
-**Link_Reprodução:** [Bug03 - Vídeo](https://drive.google.com/file/d/1il4u2jHXvLrALipwEjMPZhMjxHtdnsqU/view?usp=drive_link)
+**Prioridade:** Alta
 
 ---
 
