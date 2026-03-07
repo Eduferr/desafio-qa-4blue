@@ -313,27 +313,48 @@ Permitir login sem credenciais válidas representa uma falha crítica no mecanis
 
 ## 💡 Sugestões de melhorias para as telas
 
-### Melhorias funcionais
-- Implementar validação obrigatória campo a campo antes do envio.
-- Identificar visualmente os campos obrigatórios utilizando o símbolo (*) ao lado do rótulo do campo.
-- Exibir legenda informando que (*) indica campo obrigatório.
-- Validar formato de e-mail e telefone no front-end e no back-end.
-- Validar regras de senha com mensagens objetivas.
-- Garantir comparação entre senha e confirmação de senha.
-- Bloquear submissão quando houver inconsistências.
+### Tela de cadastro
 
-### Melhorias de experiência do usuário
-- Exibir mensagens mais claras e contextualizadas por campo.
-- Destacar visualmente os campos inválidos.
-- Evitar alertas contraditórios no mesmo fluxo.
-- Ajustar layout mobile para eliminar quebras visuais e rolagem desnecessária.
-- Melhorar o aproveitamento do espaço vertical nas telas de login e cadastro em viewport desktop, reduzindo espaçamentos excessivos entre elementos para evitar rolagem desnecessária quando o conteúdo puder ser exibido integralmente na área visível da página.
+**Melhorias funcionais**
+- Garantir a validação obrigatória dos campos antes do envio do formulário.
+- Validar o formato de e-mail e telefone tanto no front-end quanto no back-end.
+- Validar os critérios mínimos de segurança para senha, com mensagens claras sobre os requisitos.
+- Garantir a verificação de igualdade entre os campos senha e confirmação de senha.
+- Impedir o envio do formulário quando houver campos obrigatórios não preenchidos ou dados inconsistentes.
+
+**Melhorias de experiência do usuário**
+- Indicar visualmente os campos obrigatórios utilizando o símbolo (*) ao lado do rótulo do campo.
+- Exibir uma legenda indicando que (*) representa campo obrigatório.
+- Destacar visualmente os campos inválidos durante o preenchimento.
+- Exibir mensagens de erro claras e contextualizadas para cada campo.
+
+---
+
+### Tela de login
+
+**Melhorias funcionais**
+- Disponibilizar uma funcionalidade de recuperação de senha na própria tela de login, permitindo que o usuário redefina sua senha de forma segura caso a esqueça.
+- Garantir validações no servidor para impedir autenticação com credenciais vazias ou inválidas.
+
+**Melhorias de experiência do usuário**
+- Exibir mensagens de erro mais claras e contextualizadas durante o processo de autenticação.
+- Destacar visualmente os campos inválidos quando houver erro no preenchimento.
+- Evitar a exibição de alertas contraditórios no mesmo fluxo de interação.
+
+---
+
+### Problemas gerais da aplicação
+
+**Melhorias de experiência do usuário**
+- Ajustar o layout em dispositivos móveis para evitar quebras visuais e rolagem desnecessária.
+- Melhorar o aproveitamento do espaço vertical nas telas de login e cadastro em desktop, reduzindo espaçamentos excessivos quando o conteúdo puder ser exibido na área visível da página.
+
+---
 
 ### Melhorias técnicas
-- Criar identificadores estáveis nos elementos, preferencialmente com `data-testid`, ou alternativamente `id` ou `name`, para facilitar a automação de testes e a manutenção dos seletores.
-- Padronizar tratamento de erros entre front-end e back-end.
-- Adicionar testes automatizados para cenários positivos, negativos e de borda.
-- Criar validações server-side para impedir bypass de regras de negócio.
+- Criar identificadores estáveis nos elementos da interface, preferencialmente utilizando `data-testid`, ou alternativamente `id` ou `name`, para facilitar a automação de testes e a manutenção dos seletores.
+- Padronizar o tratamento de erros entre front-end e back-end.
+- Adicionar testes automatizados para cenários positivos, negativos e casos de borda.
 
 ---
 
@@ -342,6 +363,3 @@ O sistema apresenta falhas relevantes em três frentes principais:
 1. **Validação de dados:** cadastro e login aceitam entradas inválidas ou vazias.
 2. **Confiabilidade do fluxo:** há comportamento contraditório no login com sucesso e erro simultâneos.
 3. **Experiência e qualidade técnica:** problemas de responsividade, mensagens pouco úteis e dificuldade de automação devido à ausência de identificadores estáveis nos elementos da interface.
-
-Esse cenário indica a necessidade de reforço imediato nas validações de entrada, nas regras de autenticação e na padronização da experiência do usuário.
-
