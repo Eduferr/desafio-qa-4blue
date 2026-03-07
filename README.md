@@ -3,6 +3,7 @@
 ## Contexto
 
 Este documento apresenta os resultados dos testes exploratórios realizados em um microssistema composto pelas telas de Login, cadastro e tela de Sucesso, com o objetivo de identificar falhas funcionais, inconsistências de interface e oportunidades de melhoria na aplicação.
+
 Cada ocorrência foi registrada e classificada conforme sua severidade e prioridade.
 
 **Sistema avaliado:** `https://qa-play-sim.lovable.app/`  
