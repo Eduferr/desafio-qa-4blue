@@ -36,7 +36,7 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Resultado esperado:** O sistema deve impedir o cadastro quando os campos obrigatórios não estiverem preenchidos e exibir mensagens de validação para cada campo. Permitir o cadastro com dados incompletos pode comprometer a integridade dos dados e gerar inconsistências em funcionalidades como login, recuperação de conta e identificação de usuários, além de indicar ausência de validações básicas no processo de cadastro.
 
-**Severidade:** Crítico  
+**Severidade:** Crítica  
 **Prioridade:** Alta
 
 ---
@@ -47,14 +47,14 @@ A análise considerou os seguintes aspectos do sistema:
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
 2. Preencher apenas um ou alguns campos do formulário (por exemplo: apenas nome ou apenas e-mail).
-3. Deixar os demais campos obrigatórios em branco
+3. Deixar os demais campos obrigatórios em branco.
 4. Clicar no botão "Criar Conta".
 
 **Resultado atual:** O sistema permite concluir o cadastro mesmo com campos obrigatórios não preenchidos.
 
 **Resultado esperado:** O sistema deve exigir o preenchimento de todos os campos obrigatórios antes de permitir o cadastro, pois quando aceita um cadastro com apenas parte das informações preenchidas há risco de criar contas incompletas ou inválidas, o que pode comprometer a integridade dos dados. Esse comportamento também pode impactar outras funcionalidades da aplicação, como login, recuperação de senha, comunicação com o usuário e rastreabilidade das informações, além de indicar falta de validações adequadas no processo de cadastro.
 
-**Severidade:** Crítico  
+**Severidade:** Crítica  
 **Prioridade:** Alta
 
 ---
@@ -72,71 +72,63 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Resultado esperado:** O sistema deve validar o formato do e-mail e impedir o cadastro enquanto o valor informado estiver fora do padrão esperado. Sem essa validação, usuários com endereços inválidos podem ser cadastrados, o que compromete a integridade da base de dados e dificulta processos que dependem desse contato, como recuperação de senha, envio de notificações e comunicação com o usuário.
 
-**Severidade:** Alto  
+**Severidade:** Alta  
 **Prioridade:** Alta
 
 ---
 
-### BUG 04 - Campo de telefone não valida formato e caractere númerico
-**Descrição:** Embora exista máscara visual para telefone, não há validação efetiva do conteúdo informado.
+### BUG 04 - Campo de telefone não valida formato e caracteres numéricos
+**Descrição:** Embora exista uma máscara visual para o telefone, não há validação efetiva do conteúdo informado no campo.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
 2. Informar telefone incompleto ou inválido.
-3. Preencher os demais campos conforme necessário, com dados válidos.
-4. Enviar o formulário.
+3. Preencher os demais campos com dados válidos.
+4. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema aceita números fora do formato esperado.
+**Resultado atual:** O sistema aceita qualquer tipo de valor no campo de telefone, incluindo números, letras e outros caracteres, sem realizar validação do formato.
 
-**Resultado esperado:** O sistema deve validar quantidade de dígitos e estrutura do telefone antes de concluir o cadastro.
+**Resultado esperado:** O sistema deve validar a quantidade de dígitos e o formato do telefone antes de permitir a conclusão do cadastro. Sem essa validação, o sistema pode aceitar dados inválidos ou incompletos, o que compromete a qualidade e a confiabilidade das informações armazenadas, podendo gerar inconsistências na base de dados e dificultar processos como contato com o usuário, recuperação de conta, autenticação adicional e outras formas de comunicação.
 
-**Impacto:** A ausência de validação efetiva do campo de telefone permite o cadastro de dados inválidos ou incompletos, comprometendo a qualidade e a confiabilidade das informações armazenadas no sistema. Isso pode dificultar processos de contato, recuperação de conta, autenticação adicional e comunicação com o usuário, além de gerar inconsistências na base de dados.
-
-**Severidade:** Médio  
-**Prioridade:** Média\
-**Link_Reprodução:** [Bug04 - Vídeo](https://drive.google.com/file/d/1tFQdsI3oBZ7L0NPSmTqHixFnO-CkiECl/view?usp=drive_link)
+**Severidade:** Média  
+**Prioridade:** Média
 
 ---
 
 ### BUG 05 - Campos senha e confirmar senha não validam igualdade
-**Descrição:** O sistema não garante que os campos de senha e confirmação possuam exatamente o mesmo valor.
+**Descrição:** O sistema não verifica se os campos de senha e confirmação possuem exatamente o mesmo valor.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
-2. Preencher senha com um valor.
-3. Preencher confirmação com valor diferente.
-4. Preencher os demais campos conforme necessário, com dados válidos.
-5. Enviar o formulário.
+2. Preencher o campo senha com um valor.
+3. Preencher o campo confirmação de senha com um valor diferente.
+4. Preencher os demais campos com dados válidos.
+5. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema permite prosseguir mesmo com divergência entre senha e confirmação.
+**Resultado atual:** O sistema permite concluir o cadastro mesmo quando os valores de senha e confirmação são diferentes.
 
-**Resultado esperado:** O sistema deve bloquear o cadastro e informar que os campos precisam ser idênticos.
+**Resultado esperado:** O sistema deve impedir o cadastro e informar que os campos de senha e confirmação precisam possuir o mesmo valor. A ausência dessa validação pode resultar na criação de contas com credenciais diferentes das pretendidas pelo usuário. Esse comportamento pode impedir futuros acessos à conta, gerar frustração durante o login e aumentar a demanda por suporte para recuperação de senha.
 
-**Impacto:** A ausência de validação entre os campos de senha e confirmação pode resultar na criação de contas com credenciais diferentes das pretendidas pelo usuário. Esse comportamento pode impedir futuros acessos à conta, gerar frustração durante o login e aumentar a demanda por suporte para recuperação de senha.
-
-**Severidade:** Alto  
-**Prioridade:** Alta\
-**Link_Reprodução:** [Bug05 - Vídeo](https://drive.google.com/file/d/1Ce7h2TiAXbD37hwHHUmYd4AmX9tf6z45/view?usp=drive_link)
+**Severidade:** Alta  
+**Prioridade:** Alta
 
 ---
 
-### BUG 06 - Campos de senha não validam critérios mínimos
-**Descrição:** Os campos de senha não validam as regras apresentadas ou esperadas, como mínimo de 8 caracteres e pelo menos 1 caractere especial.
+### BUG 06 - Campo de senha não valida critérios mínimos definidos
+**Descrição:** O campo de senha não valida as regras mínimas esperadas, como possuir no mínimo 8 caracteres e ao menos 1 caractere especial.
 
 **Passos para reproduzir:**
 1. Acessar a tela de cadastro.
 2. Informar senha curta ou sem caractere especial.
 3. Confirmar a senha.
-4. Preencher os demais campos conforme necessário, com dados válidos.
-5. Enviar o formulário.
+4. Preencher os demais campos com dados válidos.
+5. Clicar no botão "Criar Conta".
 
-**Resultado atual:** O sistema aceita senhas fora do critério mínimo.
+**Resultado atual:** O sistema aceita senhas que não atendem aos critérios mínimos definidos.
 
-**Resultado esperado:** O sistema deve rejeitar senhas que não atendam aos critérios definidos e exibir mensagem clara ao usuário.
+**Resultado esperado:** O sistema deve rejeitar senhas que não atendam aos critérios mínimos definidos e exibir uma mensagem clara informando o motivo da rejeição. A ausência dessa validação pode permitir a criação de senhas fracas, o que aumenta o risco de acessos indevidos, ataques de força bruta e comprometimento de contas de usuários, além de indicar falhas nas práticas básicas de segurança da aplicação.
 
-**Impacto:** A falta de validação das regras de complexidade de senha viola boas práticas de segurança e pode resultar na criação de credenciais vulneráveis. Isso aumenta o risco de acessos indevidos, ataques de força bruta e comprometimento de contas de usuários, além de indicar falhas nas políticas de segurança da aplicação.
-
-**Severidade:** Alto  
+**Severidade:** Alta  
 **Prioridade:** Alta
 
 ---
@@ -155,9 +147,8 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Impacto:** O problema compromete a consistência visual da interface e transmite sensação de baixa qualidade do produto. Além de prejudicar a experiência do usuário, pode dificultar a leitura, o preenchimento dos campos e a percepção de confiabilidade da aplicação, especialmente em fluxos sensíveis como cadastro.
 
-**Severidade:** Médio  
-**Prioridade:** Média\
-**Link_Reprodução:** [Bug07 - Vídeo](https://drive.google.com/file/d/1sQRty8JUj0ZrA95FPyEnSjOfObIiX9A4/view?usp=drive_link)
+**Severidade:** Média  
+**Prioridade:** Média
 
 ---
 
@@ -177,9 +168,8 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Impacto:** A ausência de validação de unicidade do e-mail pode gerar múltiplas contas associadas ao mesmo endereço, comprometendo a integridade da base de dados e causando inconsistências em fluxos como autenticação, recuperação de senha, comunicação com o usuário e controle de identidade. Além disso, pode gerar conflitos na gestão de contas e dificultar o suporte ao usuário.
 
-**Severidade:** Alto
-**Prioridade:** Alta\
-**Link_Reprodução:** [Bug08 - Vídeo](https://drive.google.com/file/d/1kizlnLkKQBdAP0RiNhoP_MtjqDIyfgJo/view?usp=drive_link)
+**Severidade:** Alta
+**Prioridade:** Alta
 
 ---
 
