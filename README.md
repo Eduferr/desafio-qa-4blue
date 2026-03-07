@@ -199,93 +199,83 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Resultado atual:** O sistema exibe uma mensagem genérica, que não ajuda o usuário a entender o motivo da falha no login.
 
-**Resultado esperado:** O sistema deve apresentar uma mensagem mais clara e útil para o usuário, indicando de forma adequada o motivo real da falha na autenticação, pois a mensagem de erro genérica reduz a clareza do feedback fornecido ao usuário durante o processo de autenticação. Isso pode gerar frustração, tentativas repetidas de acesso, aumento na demanda por suporte técnico e menor eficiência no processo de correção ou recuperação de credenciais pelo usuário.
+**Resultado esperado:** O sistema deve exibir uma mensagem mais clara para o usuário, indicando o motivo da falha no login. A mensagem atual é muito genérica e dificulta entender se o problema está no e-mail, na senha ou em outra situação. Isso pode gerar tentativas repetidas de acesso, frustração para o usuário e aumento na procura por suporte.
 
 **Severidade:** Média  
 **Prioridade:** Média
 
 ---
 
-### BUG 11 - Login válido exibe simultaneamente mensagem de sucesso e alerta de erro inesperado
-**Descrição:** Ao realizar login com credenciais válidas, o sistema apresenta mensagem de sucesso, porém também exibe um alerta de "Erro inesperado".
+### BUG 11 - Login válido exibe ao mesmo tempo mensagem de sucesso e erro inesperado
+**Descrição:** Ao realizar login com credenciais válidas, o sistema mostra a mensagem de sucesso, mas também exibe um alerta de "Erro inesperado".
 
 **Passos para reproduzir:**
 1. Cadastrar um usuário válido.
 2. Acessar a tela de login.
 3. Informar e-mail e senha válidos.
-4. Clicar em entrar.
+4. Clicar em "Entrar".
 
-**Resultado atual:** O sistema sinaliza sucesso e erro ao mesmo tempo.
+**Resultado atual:** O sistema exibe ao mesmo tempo uma mensagem de sucesso e um alerta de erro.
 
-**Resultado esperado:** Em caso de autenticação bem-sucedida, apenas a mensagem de sucesso deve ser exibida, seguida do fluxo esperado de navegação.
+Resultado esperado: Quando o login for realizado com sucesso, apenas a mensagem de sucesso deve ser exibida, seguida do fluxo normal da aplicação. Quando o sistema mostra sucesso e erro ao mesmo tempo, isso gera confusão para o usuário, que pode entender que o login falhou mesmo tendo sido realizado corretamente. Esse tipo de comportamento também passa a sensação de instabilidade ou falha no sistema.
 
-**Impacto:** A exibição simultânea de mensagens de sucesso e erro gera inconsistência no feedback do sistema, comprometendo a confiabilidade da aplicação e causando confusão para o usuário. Esse comportamento pode levar o usuário a interpretar que o login falhou, mesmo quando a autenticação foi bem-sucedida, impactando negativamente a experiência de uso e a percepção de estabilidade do sistema.
-
-**Severidade:** Alto  
-**Prioridade:** Alta\
-**Link_Reprodução:** [Bug11 - Vídeo](https://drive.google.com/file/d/17IUxBwP_WTXdp9U5SoVUDSB6sOHKHnXj/view?usp=drive_link)
+**Severidade:** Alta  
+**Prioridade:** Alta
 
 ---
 
 ### BUG 12 – Texto de validação de senha exibido incorretamente na tela de login
-
-**Descrição:** Na tela de login, abaixo do campo de senha, é exibida a mensagem "A senha precisa ter no mínimo 8 caracteres e 1 caractere especial.". Esse texto refere-se às regras de criação de senha (fluxo de cadastro ou redefinição de senha) e não é aplicável ao processo de autenticação. Além disso, a tela de login não apresenta a opção "Esqueceu a senha?", que é uma funcionalidade comum para recuperação de acesso.
+**Descrição:** Na tela de login, abaixo do campo de senha, é exibida a mensagem "A senha precisa ter no mínimo 8 caracteres e 1 caractere especial.". Esse texto se refere às regras de criação de senha (usadas no cadastro ou redefinição de senha) e não deveria aparecer no fluxo de login.
 
 **Passos para reproduzir:**
 1. Acessar a tela de login da aplicação.
 2. Observar o texto exibido abaixo do campo Senha.
 
-**Resultado atual:** A tela de login apresenta a mensagem: "A senha precisa ter no mínimo 8 caracteres e 1 caractere especial.". Esse texto corresponde à validação de criação de senha e não ao fluxo de login.
+**Resultado atual:** A tela de login exibe a mensagem "A senha precisa ter no mínimo 8 caracteres e 1 caractere especial.", que corresponde à validação de criação de senha e não ao processo de autenticação.
 
-**Resultado esperado:** A tela de login deve apresentar a opção: "Esqueceu a senha?". Essa opção deve direcionar o usuário para o fluxo de recuperação ou redefinição de senha.
-
-**Impacto:** Pode gerar confusão ao usuário, pois a mensagem exibida sugere uma validação de formato de senha que não se aplica ao processo de autenticação.
+**Resultado esperado:** A tela de login não deve exibir regras de criação de senha. Em vez disso, deve apresentar a opção "Esqueceu a senha?", para direcionar o usuário ao fluxo de recuperação ou redefinição de senha. A ausência dessa opção dificulta o acesso de usuários que esqueceram suas credenciais.
 
 **Severidade:** Baixa
-**Prioridade:** Baixa\
-**Link_Reprodução:** [Bug12 - Imagem](https://drive.google.com/file/d/1k4655IMAEC4P1uelZYUs01Vui0K5S2o5/view?usp=drive_link)
+**Prioridade:** Baixa
 
 ---
 
 ## Problemas Gerais
 
 ### BUG 13 - Problemas de responsividade em viewport mobile
-**Descrição:** Há erro de responsividade recorrente nas telas mobile, com formulários excessivamente estendidos na vertical, elementos desconfigurados e barra de rolagem vertical desnecessária.
+**Descrição:** Alguns elementos da interface ficam desconfigurados quando acessa o sistema em dispositivos móveis.
 
 **Passos para reproduzir:**
 1. Abrir o sistema em viewport mobile.
 2. Acessar as telas de login e cadastro.
-3. Observar a disposição visual dos componentes.
+3. Observar a disposição dos elementos na tela.
 
-**Resultado atual:** O layout apresenta quebra visual, excesso de espaço vertical e experiência inconsistente em dispositivos móveis.
+**Resultado atual:** O layout apresenta quebra visual, excesso de espaço vertical e uma experiência inconsistente em dispositivos móveis.
 
-**Resultado esperado:** Os elementos devem se adaptar corretamente ao viewport mobile, sem deformações, sem desalinhamentos e sem rolagem desnecessária.
-
-**Impacto:** A falha de responsividade compromete a experiência de navegação em dispositivos móveis, dificultando a visualização e interação com os formulários. Considerando que grande parte dos acessos a sistemas web ocorre por smartphones, o problema pode impactar negativamente a usabilidade, a percepção de qualidade do produto e as taxas de conversão de usuários.
+**Resultado esperado:** Os elementos devem se ajustar corretamente ao tamanho da tela em dispositivos móveis, mantendo alinhamento, proporção adequada e sem rolagem desnecessária. Esse problema de responsividade prejudica a navegação em dispositivos móveis, dificultando a visualização e a interação com os formulários. Como grande parte dos acessos a sistemas web acontece por smartphones, essa falha pode impactar a usabilidade, a percepção de qualidade do produto e até a conversão de usuários.
 
 **Severidade:** Médio  
-**Prioridade:** Média\
-**Link_Reprodução:** [Bug13 - Vídeo](https://drive.google.com/file/d/1arJvGQaK4BwVtF__uSWPIFItW7r2OV3A/view?usp=drive_link)
+**Prioridade:** Média
 
 ---
 
-### BUG 14 - Ausência de identificadores estáveis nos elementos prejudica a automação e manutenção
-**Descrição:** Os elementos interativos das telas, especialmente os campos de entrada de dados do usuário e botões de ação, não possuem identificadores estáveis e específicos, como `id`, `name` ou `data-testid`. Na inspeção, observa-se que os campos dependem principalmente de atributos como `class`, `type` e `placeholder`, que não são ideais para automação confiável e rastreabilidade técnica.
+### BUG 14 - Ausência de identificadores estáveis nos elementos prejudica automação e manutenção
+
+**Descrição:** Os elementos interativos das telas, como campos de entrada e botões de ação, não possuem identificadores estáveis como `id`, `name` ou `data-testid`. Ao inspecionar os elementos no navegador, observa-se que os campos dependem principalmente de atributos como `class`, `type` e `placeholder`, que não são ideais para automação de testes e rastreabilidade técnica.
 
 **Passos para reproduzir:**
 1. Acessar as telas de login e cadastro.
 2. Inspecionar os campos e botões no navegador.
 3. Verificar os atributos disponíveis nos elementos interativos.
 
-**Resultado atual:** Os elementos não possuem identificadores estáveis suficientes para facilitar automação confiável.
+**Resultado atual:** Os elementos não possuem identificadores estáveis que facilitem a criação e manutenção de testes automatizados.
 
-**Resultado esperado:** Os componentes interativos devem possuir identificadores únicos, consistentes e estáveis, preferencialmente `data-testid`, ou alternativamente `id/name`, para permitir automação confiável, manutenção simplificada e melhor rastreabilidade técnica.
+**Resultado atual:** Os elementos não possuem identificadores estáveis que facilitem a criação e manutenção de testes automatizados.
 
-**Impacto:** Sem identificadores estáveis (id, name, data-testid), os testes acabam usando seletores frágeis como: :nth-child(), classes visuais e hierarquia do DOM. Qualquer alteração de layout pode quebrar os testes mesmo sem mudança funcional.
+**Resultado esperado:** Os componentes interativos devem possuir identificadores únicos e estáveis, como `data-testid` ou, alternativamente, `id` ou `name`, para facilitar a automação e a manutenção dos testes. Sem esses identificadores, os testes acabam dependendo de seletores frágeis, como `:nth-child()`, classes visuais ou a própria hierarquia do DOM. Com isso, qualquer alteração no layout pode quebrar os testes, mesmo sem mudança funcional na aplicação.
 
 **Severidade:** Baixo  
-**Prioridade:** Média\
-**Link_Reprodução:** [Bug14 - Imagem](https://drive.google.com/open?id=1u2untEkZj5Pgw5KFOrOuHKI2kkk8ws4b&usp=drive_copy)
+**Prioridade:** Média
 
 ---
 
