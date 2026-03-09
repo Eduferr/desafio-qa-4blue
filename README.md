@@ -302,7 +302,6 @@ Considerando o impacto funcional, os riscos de segurança e a integridade dos da
 Este bug deve ser corrigido primeiro porque compromete a integridade dos dados logo na origem. 
 Ao permitir o cadastro de usuários sem nenhum dado preenchido, o sistema passa a aceitar registros inválidos na base de dados, o que pode impactar funcionalidades essenciais como autenticação, recuperação de senha e comunicação com o usuário.
 
-
 ### 2) BUG 09 - Permissão de login com e-mail e senha vazios após cadastro inconsistente 
 
 Este bug deve ser priorizado em seguida porque compromete diretamente o controle de acesso da aplicação. 
@@ -351,7 +350,7 @@ Permitir login sem credenciais válidas representa uma falha crítica no mecanis
 ---
 
 ### Melhorias técnicas
-- Criar identificadores estáveis nos elementos da interface, preferencialmente utilizando `data-testid`, ou alternativamente `id` ou `name`, para facilitar a automação de testes e a manutenção dos seletores.
+- Criar identificadores estáveis nos elementos da interface, preferencialmente utilizando `data-testid`, ou alternativamente `id` ou `name`, para facilitar a automação de testes e a manutenção dos seletores. A ausência desses identificadores obriga o uso de seletores frágeis baseados em classes ou na estrutura do DOM, o que pode causar falhas quando ocorrem alterações no HTML ou no layout, além de dificultar integrações e a manutenção do sistema.
 - Padronizar o tratamento de erros entre front-end e back-end.
 - Adicionar testes automatizados para cenários positivos, negativos e casos de borda.
 
