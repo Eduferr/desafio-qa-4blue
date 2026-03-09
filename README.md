@@ -289,7 +289,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** Os elementos da interface devem se ajustar corretamente ao tamanho da tela em dispositivos móveis, mantendo alinhamento, proporção adequada e organização visual consistente. Problemas de responsividade podem prejudicar a navegação e dificultar a interação com os elementos da interface, impactando negativamente a experiência do usuário.
 
 **Severidade:** Média  
-**Prioridade:** Média
+**Prioridade:** Média\
+**Evidência:** [Responsividade em viewport mobile](https://drive.google.com/file/d/1arJvGQaK4BwVtF__uSWPIFItW7r2OV3A/view?usp=sharing) 
 
 ---
 
