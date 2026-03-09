@@ -252,7 +252,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** Quando o login for realizado com sucesso, o sistema deve exibir apenas a confirmação de autenticação bem-sucedida e seguir o fluxo normal da aplicação, redirecionando o usuário para a próxima tela. A exibição simultânea de mensagens de sucesso e erro gera ambiguidade na comunicação com o usuário, podendo causar confusão sobre o estado real da autenticação e transmitir a percepção de instabilidade ou falha no sistema.
 
 **Severidade:** Alta  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Evidência:** [Exibição simultânea de mensagem](https://drive.google.com/file/d/17IUxBwP_WTXdp9U5SoVUDSB6sOHKHnXj/view?usp=drive_link) 
 
 ---
 
@@ -269,7 +270,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** A tela de login não deve exibir regras relacionadas à criação de senha. Em vez disso, a interface deve apresentar orientações adequadas ao processo de autenticação, como a opção `Esqueceu a senha?`, permitindo ao usuário acessar o fluxo de recuperação ou redefinição de senha. A presença de mensagens inadequadas pode gerar confusão na interface e prejudicar a experiência do usuário durante o acesso ao sistema.
 
 **Severidade:** Baixa  
-**Prioridade:** Baixa
+**Prioridade:** Baixa\
+**Evidência:** [Exibição incorreta de regra de criação](https://drive.google.com/file/d/1k4655IMAEC4P1uelZYUs01Vui0K5S2o5/view?usp=sharing) 
 
 ---
 
