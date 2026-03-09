@@ -377,3 +377,10 @@ O sistema apresenta falhas relevantes em três frentes principais:
 1. **Validação de dados:** cadastro e login aceitam entradas inválidas ou vazias.
 2. **Confiabilidade do fluxo:** há comportamento contraditório no login com sucesso e erro simultâneos.
 3. **Experiência e qualidade técnica:** problemas de responsividade, mensagens pouco úteis e dificuldade de automação devido à ausência de identificadores estáveis nos elementos da interface.
+
+--- 
+
+### Nota
+- Este documento foi elaborado por Eduardo Ferreira.
+- A análise, identificação e reporte dos bugs, bem como as propostas de melhorias, são de minha autoria, seguindo boas práticas de Qualidade de Software
+- A ferramenta de Inteligência Artificial (IA) foi utilizada pontualmente apenas como apoio na revisão textual e na organização da redação.
