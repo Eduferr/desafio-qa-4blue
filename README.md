@@ -97,7 +97,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** O sistema deve validar se o e-mail informado já está cadastrado antes de permitir a submissão do formulário, impedindo a criação de contas duplicadas e exibindo uma mensagem informativa ao usuário, como `Este e-mail já está cadastrado`. Essa validação garante a unicidade das contas, preserva a integridade da base de dados e evita inconsistências em funcionalidades como autenticação, recuperação de senha e comunicação com o usuário, podendo também orientar o usuário a realizar login ou recuperar a senha.
 
 **Severidade:** Alta  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Evidência:** [validação de e-mail já cadastrado](https://drive.google.com/file/d/1b_35704nvcjxXP7X4x3mGOlSNfr-bFSO/view?usp=drive_link) 
 
 ---
 
@@ -116,7 +117,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** O sistema deve validar o formato e a quantidade de dígitos do telefone conforme a máscara do campo `(00) 00000-0000`, permitindo apenas caracteres numéricos antes da submissão do formulário. Essa validação garante que o número esteja completo e no padrão esperado, evitando o registro de dados incorretos que possam comprometer funcionalidades como comunicação com o usuário, autenticação adicional e recuperação de conta.
 
 **Severidade:** Média  
-**Prioridade:** Média
+**Prioridade:** Média\
+**Evidência:** [validação do formato e conteúdo do campo telefone](https://drive.google.com/file/d/1Fer5PPAqHN43calWp0_6yxeyqtgtKRTy/view?usp=drive_link) 
 
 ---
 
@@ -185,17 +187,19 @@ A análise considerou os seguintes aspectos do sistema:
 **Descrição:** Foi realizado o teste de autenticação após criar um cadastro inconsistente, com o objetivo de verificar se o sistema valida corretamente a presença das credenciais obrigatórias (e-mail e senha) no processo de login.
 
 **Passos para reproduzir:**
-1. Realizar um cadastro deixando os campos de e-mail e senha vazios.
-2. Após a conclusão do cadastro, acessar a tela de login.
-3. Deixar os campos de e-mail e senha em branco.
-4. Clicar no botão "Entrar".
+1. Tentar acessar o sistema com os campos E-mail e Senha em branco.
+2. Realizar um cadastro deixando os campos E-mail e Senha vazios.
+3. Após a conclusão do cadastro, acessar novamente a tela de login.
+4. Realizar novo acesso deixando os campos E-mail e Senha em branco.
+5. Clicar no botão "Entrar".
 
 **Resultado atual:** No cenário testado, o sistema permitiu a autenticação do usuário mesmo quando os campos de e-mail e senha estavam vazios.
 
 **Resultado esperado:** O sistema deve impedir o processo de autenticação quando os campos de e-mail e senha não estiverem preenchidos, exibindo uma mensagem de erro apropriada e bloqueando o acesso. Além disso, registros inconsistentes criados durante o processo de cadastro não devem ser aceitos como credenciais válidas para login. A ausência dessa validação compromete o controle de acesso da aplicação e pode representar risco à segurança do sistema.
 
 **Severidade:** Crítica  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Evidência:** [Login com e-mail e senha vazios](https://drive.google.com/file/d/1sgXKDgbuuBMXRN7ftJsUzcHcZvQwVzuc/view?usp=drive_link) 
 
 ---
 
@@ -215,7 +219,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** O sistema deve impedir o processo de autenticação quando o campo de senha não estiver preenchido, exibindo uma mensagem de erro apropriada e bloqueando o acesso. Além disso, registros inconsistentes criados durante o processo de cadastro não devem ser aceitos como credenciais válidas para login. A ausência dessa validação compromete o controle de acesso da aplicação e pode representar um risco à segurança do sistema.
 
 **Severidade:** Crítica  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Evidência:** [login apenas com e-mail](https://drive.google.com/file/d/1QfKMCU0lvDmFCmC9rj09YjCxi5i6t-kC/view?usp=drive_link) 
 
 ---
 
@@ -225,15 +230,17 @@ A análise considerou os seguintes aspectos do sistema:
 
 **Passos para reproduzir:**
 1. Acessar a tela de login.
-2. Informar credenciais inválidas ou parcialmente incorretas (por exemplo, e-mail inexistente ou senha incorreta).
-3. Clicar no botão "Entrar".
+2. Informar um e-mail já cadastrado no sistema.
+3. Informar a senha inexistente ou deixar o campo senha em branco.
+4. Clicar no botão "Entrar".
 
 **Resultado atual:** Nos cenários testados, o sistema exibe apenas a mensagem genérica **"Conta não encontrada. Crie uma conta primeiro."**, sem indicar claramente o motivo da falha no login.
 
 **Resultado esperado:** O sistema deve exibir mensagens claras e apropriadas ao contexto da falha de autenticação. Em casos de credenciais incorretas, pode ser exibida uma mensagem neutra como `E-mail ou senha inválidos`. Quando o e-mail não estiver cadastrado, o sistema pode orientar o usuário com a mensagem `Conta não encontrada. Crie uma conta primeiro`. Mensagens claras ajudam a evitar tentativas repetidas de acesso, frustração do usuário e aumento na demanda por suporte.
 
 **Severidade:** Média  
-**Prioridade:** Média
+**Prioridade:** Média\
+**Evidência:** [Mensagem de erro genérica](https://drive.google.com/file/d/19emn0ffEoaSyeYbDUywUZAqlSd_ncNRr/view?usp=drive_link) 
 
 ---
 
@@ -242,9 +249,9 @@ A análise considerou os seguintes aspectos do sistema:
 **Descrição:** Foram realizados os testes de autenticação com credenciais válidas, com o objetivo de verificar o comportamento do sistema após a realização de um login bem-sucedido.
 
 **Passos para reproduzir:**
-1. Cadastrar um usuário com dados válidos.
-2. Acessar a tela de login.
-3. Informar o e-mail e a senha cadastrados.
+1. Acessar a tela de login.
+2. Informar um e-mail já cadastrado no sistema.
+3. Informar a senha correspondente.
 4. Clicar no botão "Entrar".
 
 **Resultado atual:** Nos cenários testados, o sistema exibiu simultaneamente uma mensagem de sucesso no login e um alerta informando `Erro inesperado`.
