@@ -39,7 +39,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** O sistema deve impedir a submissão do formulário quando nenhum dado for preenchido e exibir mensagens de validação para cada campo obrigatório, informando que o preenchimento é necessário. Essa validação é essencial para preservar a integridade dos dados e o funcionamento do sistema de autenticação da aplicação.
 
 **Severidade:** Crítica  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Evidência:** [Ausência total de dados na submissão](https://drive.google.com/file/d/1VjPqs_c17_RciTYtFVtGL7Nci5xVIeGz/view?usp=drive_link) 
 
 ---
 
@@ -58,7 +59,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** O sistema deve impedir a submissão do formulário quando qualquer campo obrigatório não estiver preenchido, exibindo mensagens de validação específicas para o campo correspondente. Essa validação é necessária para garantir a integridade dos dados e evitar a criação de registros incompletos que possam comprometer funcionalidades como autenticação, recuperação de conta e comunicação com o usuário.
 
 **Severidade:** Crítica  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Evidência:** [Ausência parcial de dados na submissão](https://drive.google.com/file/d/1gXr5REtdUjw7I2QDg2BfqPt2ubDh4W70/view?usp=drive_link) 
 
 ---
 
@@ -77,7 +79,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** O sistema deve validar o formato do e-mail conforme o padrão esperado (ex.: `usuario@dominio.com`) antes de permitir a submissão do formulário, exibindo mensagem de erro quando o valor informado não estiver em conformidade. Essa validação é necessária para garantir a integridade dos dados e o correto funcionamento de funcionalidades como autenticação, recuperação de senha e comunicação com o usuário.
 
 **Severidade:** Alta  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Evidência:** [validação do formato de e-mail](https://drive.google.com/file/d/1POF5ETKGYBHgDxH0BqhEYabLwUPe4zZ4/view?usp=drive_link) 
 
 ---
 
@@ -138,7 +141,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** O sistema deve validar se os valores informados nos campos senha e confirmar senha são idênticos antes de permitir a submissão do formulário, exibindo mensagem de erro quando houver divergência. Essa validação garante que o usuário cadastre corretamente suas credenciais e evita problemas de acesso ou solicitações desnecessárias de recuperação de senha.
 
 **Severidade:** Alta  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Evidência:** [validação de igualdade senha e confirmar senha](https://drive.google.com/file/d/1D0Z8lwYK1j18bdeh5q-r0IuSIQTEclKI/view?usp=drive_link) 
 
 ---
 
@@ -158,7 +162,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** O sistema deve validar critérios mínimos de segurança da senha antes da submissão do formulário, como quantidade mínima de caracteres e presença de caracteres especiais, exibindo mensagens claras quando os requisitos não forem atendidos. Essa validação é necessária para evitar senhas fracas e reduzir riscos de acessos indevidos e comprometimento de contas de usuários.
 
 **Severidade:** Alta  
-**Prioridade:** Alta
+**Prioridade:** Alta\
+**Evidência:** [Ausência de identificadores](https://drive.google.com/file/d/1gTDXfxvFjHeFXNUmEbDloBAXUx-3NY--/view?usp=drive_link) 
 
 ---
 
@@ -176,7 +181,8 @@ A análise considerou os seguintes aspectos do sistema:
 **Resultado esperado:** Os campos do formulário devem manter alinhamento consistente em suas respectivas colunas, sem sobreposição entre elementos e respeitando os limites do container principal. Essa organização é essencial para preservar a clareza visual da interface e garantir uma experiência adequada ao usuário durante o preenchimento do cadastro.
 
 **Severidade:** Média  
-**Prioridade:** Média
+**Prioridade:** Média\
+**Evidência:** [Ausência de identificadores](https://drive.google.com/file/d/1U7YhxAzlC1-DW_3oSLXIjbJ1L2o32g7B/view?usp=drive_link) 
 
 ---
 
